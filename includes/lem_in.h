@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/24 23:17:10 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/25 00:43:40 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef enum
 typedef struct		s_node
 {
 	int				value;
-	char			*name;
 	struct s_node	*next;
 }					t_node;
 
@@ -45,12 +44,14 @@ typedef struct		s_graph
 {
 	int				nb_sommets;
 	t_links			*tab_links;
+	int				start;
+	int				end;
+	int				nb_ants;
 }					t_graph;
 
 t_graph				*new_graph(int nb_sommets);
-t_node				*add_node(int value, char *name);
-//void				add_edge(t_graph *graph, int src, int dest);
-void				add_edge(t_graph *graph, t_node *n1, t_node *n2);
+t_node				*add_node(int value);
+void				add_edge(t_graph *graph, int src, int dest);
 void				del_graph(t_graph *graph);
 void				print_graph(t_graph *graph);
 

@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2017/12/24 22:40:42 by gmonnier         ###   ########.fr        #
+#    Updated: 2017/12/25 00:36:56 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,4 +69,4 @@ $(LIB):
 	make -C $(@D)
 
 test: all
-	./$(NAME)
+	./$(NAME) < test.txt
