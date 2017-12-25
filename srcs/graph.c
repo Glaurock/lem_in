@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:18:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/25 17:09:12 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/25 22:50:39 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_node				*create_node(int number, char *name)
 	//check malloc
 
 	new->number = number;
+	new->is_free = 1;
+	new->is_a_path = 0;
 	new->name = ft_strdup(name);
 	new->next = NULL;
 	new->edges_l = NULL;
@@ -110,7 +112,7 @@ void				print_graph(t_graph *graph)
 	}
 	while (node)
 	{
-		ft_dprintf(2, "Number : (%d), name : (%s) ", node->number, node->name);
+		ft_dprintf(2, "Number : (%d), name : (%s), %s ", node->number, node->name, node->is_free ? "free" : "occuped");
 		edge = node->edges_l;
 		while (edge)
 		{

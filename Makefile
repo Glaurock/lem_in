@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2017/12/25 17:15:24 by gmonnier         ###   ########.fr        #
+#    Updated: 2017/12/25 21:20:48 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ INCDIR = includes \
 SRC = \
 	main.c \
 	graph.c \
+	node_utils.c \
 	input.c \
 	dijkstra.c
 

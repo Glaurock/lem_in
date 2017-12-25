@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:22:01 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/25 18:06:31 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/25 22:14:01 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,44 @@ void		print_weight(int **tab, int size)
 	}
 }
 
-void		print_path(t_node **tab_previous, int start, int end)
+/*
+** attention, le path contiendra uniquement les numeros des sommets, et non leur nom
+*/
+
+t_node		*get_path(t_node **tab_previous, int start, int end)
 {
-	int		i;
+	t_node	*path;
 	t_node	*current;
 
-	current = tab_previous[end];
-	ft_dprintf(2, "%d --> ", end);
+	path = create_node(end, 0);
+	current = path;
 	while (current->number != start)
 	{
-		if (current)
-			ft_dprintf(2, "%d --> ", current->number);
-		current = tab_previous[current->number];
+		current->next = create_node(tab_previous[current->number]->number, 0);
+		current = current->next;
 	}
-	ft_dprintf(2, "%d\n", start);
+	free(tab_previous);
+	ft_reverse_path(&path);
+	return (path);
 }
 
-t_node		**dijkstra_algo(t_graph *graph, int start, int end)
+int			unreacheable_check(int **tab, int size)
 {
-	t_edge	*path;
+	int i;
+	int check;
+
+	i = -1;
+	check = 0;
+	while (++i < size)
+	{
+		if (tab[SEEN][i] == false && tab[WEIGHT][i] != -1)
+			check = 1;
+	}
+	return (check);
+}
+
+t_node		*dijkstra_algo(t_graph *graph, int start, int end)
+{
 	int		*tab[2];
 	t_node	**tab_previous;
 	int		i;
@@ -76,6 +95,7 @@ t_node		**dijkstra_algo(t_graph *graph, int start, int end)
 	t_edge	*edge;
 	int		i_son;
 	int		i_father;
+	t_node	*path;
 
 	ft_dprintf(2, "--------Start aglo--------\n\n");
 	path = NULL;
@@ -99,18 +119,19 @@ t_node		**dijkstra_algo(t_graph *graph, int start, int end)
 	i = 0;
 	while (i_father != end)
 	{
-		i_father = get_index_min_weight(tab, graph->nb_sommets);
 		//ft_dprintf(2, "i_father : %d\n", i_father);
 		tab[SEEN][i_father] = true;
 
-		/* on parcours les fils du noeud */
+		// on parcours les fils du noeud
 
 		current = give_node(graph, i_father);
+		//ft_dprintf(2, "current: %d\n", current->number);
 		edge = current->edges_l;
+		//ft_dprintf(2, "edges: %d\n", current->edges_l->links_to->number);
 		while (edge)
 		{
 			i_son = edge->links_to->number;
-			/* si le noeud n'a pas encore ete parcouru */
+			// si le noeud n'a pas encore ete parcouru 
 			if (tab[SEEN][i_son] == false)
 			{
 				if (tab[WEIGHT][i_son] == -1 ||
@@ -122,11 +143,19 @@ t_node		**dijkstra_algo(t_graph *graph, int start, int end)
 			}
 			edge = edge->next;
 		}
-		print_weight(tab, graph->nb_sommets);
+		//print_weight(tab, graph->nb_sommets);
+		// check for unreacheable nodes
+		i_father = get_index_min_weight(tab, graph->nb_sommets);
+		if (!unreacheable_check(tab, graph->nb_sommets))
+			return (NULL);
 	}
 	/* on retrouve le chemin a emprunter */
-	print_path(tab_previous, start, end);
+
+	/* traite tab_previous pour obtenir le chemin */
+	path = get_path(tab_previous, start, end);
+
+	print_path(path);
 	free(tab[WEIGHT]);
 	free(tab[SEEN]);
-	return (tab_previous); // to free
+	return (path); // to free
 }
