@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 10:41:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/22 11:12:00 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/25 10:37:09 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct		s_list
 }					t_list;
 
 void				ft_swap_ptr(void **ptr1, void **ptr2);
+void				die(char *msg);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);

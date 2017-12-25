@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/25 00:43:40 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/25 15:11:55 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,45 @@ typedef enum
 }				e_bool;
 
 /*
+** la liste des liens
+*/
+
+typedef struct		s_edge
+{
+	struct s_node	*links_to;
+	struct s_edge	*next;
+}					t_edge;
+
+/*
 ** un noeud du graphe
 */
 
 typedef struct		s_node
 {
-	int				value;
+	int				number;
+	char			*name;
+	struct s_edge	*edges_l;
 	struct s_node	*next;
 }					t_node;
 
 /*
-** Liste d'adjacence
+** contient les donnees du graph et un pointeur vers le premier sommet
 */
-
-typedef struct		s_links
-{
-	t_node			*head;
-}					t_links;
 
 typedef struct		s_graph
 {
-	int				nb_sommets;
-	t_links			*tab_links;
 	int				start;
 	int				end;
 	int				nb_ants;
+	int				nb_sommets;
+	struct s_node	*head;
 }					t_graph;
 
-t_graph				*new_graph(int nb_sommets);
-t_node				*add_node(int value);
-void				add_edge(t_graph *graph, int src, int dest);
+t_node				*create_node(int number, char *name);
+void				push_end(t_graph *graph, t_node *node);
+void				add_edge(t_node *n1, t_node *n2);
 void				del_graph(t_graph *graph);
 void				print_graph(t_graph *graph);
+t_node				*give_node(t_graph *graph, char *name);
 
 #endif

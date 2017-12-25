@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 08:45:37 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/11/22 15:49:26 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/25 10:35:29 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int			loop(const int fd, char *sta_buff[MAX_FD], int ret[MAX_FD])
 		tmp = ft_strjoin(sta_buff[fd], buff);
 		free(sta_buff[fd]);
 		sta_buff[fd] = tmp;
-		if (ft_strlen(buff) < BUFF_SIZE)
-			break ;
 	}
 	return (0);
 }

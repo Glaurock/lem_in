@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2017/12/22 10:52:33 by gmonnier         ###   ########.fr        #
+#    Updated: 2017/12/25 10:36:04 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ INCDIR = includes
 
 SRC = \
 	other/ft_swap_ptr.c \
+	other/die.c
 
 SRC += \
 	test/ft_isalnum.c \
