@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:18:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/25 15:44:54 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/25 17:09:12 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void				print_graph(t_graph *graph)
 	}
 }
 
-t_node				*give_node(t_graph *graph, char *name)
+t_node				*give_node_name(t_graph *graph, char *name)
 {
 	t_node *node;
 
@@ -130,6 +130,21 @@ t_node				*give_node(t_graph *graph, char *name)
 	while (node)
 	{
 		if (ft_strcmp(node->name, name) == 0)
+			return (node);
+		node = node->next;
+	}
+	return (NULL);
+}
+
+
+t_node				*give_node(t_graph *graph, int number)
+{
+	t_node *node;
+
+	node = graph->head;
+	while (node)
+	{
+		if (node->number == number)
 			return (node);
 		node = node->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/25 15:11:55 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/25 16:55:28 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define LEM_IN_H
 
 # include "libft.h"
+
+# define WEIGHT 0
+# define SEEN 1
 
 typedef enum
 {
@@ -61,6 +64,12 @@ void				push_end(t_graph *graph, t_node *node);
 void				add_edge(t_node *n1, t_node *n2);
 void				del_graph(t_graph *graph);
 void				print_graph(t_graph *graph);
-t_node				*give_node(t_graph *graph, char *name);
+t_node				*give_node_name(t_graph *graph, char *name);
+t_node				*give_node(t_graph *graph, int number);
+
+void	get_input(t_graph *graph);
+
+/* algo */
+t_node		**dijkstra_algo(t_graph *graph, int start, int end);
 
 #endif
