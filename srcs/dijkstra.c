@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:22:01 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/25 22:14:01 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 17:25:05 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ t_node		*dijkstra_algo(t_graph *graph, int start, int end)
 	int		i_son;
 	int		i_father;
 	t_node	*path;
+	t_node	*tmp_check;
 
 	ft_dprintf(2, "--------Start aglo--------\n\n");
 	path = NULL;
@@ -125,6 +126,10 @@ t_node		*dijkstra_algo(t_graph *graph, int start, int end)
 		// on parcours les fils du noeud
 
 		current = give_node(graph, i_father);
+
+		if (current->is_a_path)
+			tab[WEIGHT][i_father] += 5000;
+
 		//ft_dprintf(2, "current: %d\n", current->number);
 		edge = current->edges_l;
 		//ft_dprintf(2, "edges: %d\n", current->edges_l->links_to->number);
@@ -153,8 +158,11 @@ t_node		*dijkstra_algo(t_graph *graph, int start, int end)
 
 	/* traite tab_previous pour obtenir le chemin */
 	path = get_path(tab_previous, start, end);
+	tmp_check = give_node(graph, path->next->number);
+	if (tmp_check->is_a_path)
+		return (NULL); //del path avant
 
-	print_path(path);
+	//print_path(path);
 	free(tab[WEIGHT]);
 	free(tab[SEEN]);
 	return (path); // to free

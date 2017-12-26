@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:18:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/25 22:50:39 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 17:09:49 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void				print_graph(t_graph *graph)
 	}
 	while (node)
 	{
-		ft_dprintf(2, "Number : (%d), name : (%s), %s ", node->number, node->name, node->is_free ? "free" : "occuped");
+		ft_dprintf(2, "Number : (%d), name : (%s), %s , %s ", node->number, node->name, node->is_free ? "free" : "occuped", node->is_a_path ? "path" : "not_path");
 		edge = node->edges_l;
 		while (edge)
 		{

@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/25 22:51:16 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 17:42:35 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,16 @@ typedef struct		s_node
 	int				number;
 	char			*name;
 	int				is_free :2;
-	int				is_a_path :2;
+	int				is_a_path: 2;
+	//int				weight;
 	struct s_edge	*edges_l;
 	struct s_node	*next;
 }					t_node;
+
+typedef struct		s_path
+{
+	struct s_node	*head_path;
+}					t_path;
 
 /*
 ** contient les donnees du graph et un pointeur vers le premier sommet
@@ -71,6 +77,8 @@ typedef struct		s_graph
 	int				nb_sommets;
 	struct s_node	*head;
 	struct s_ant	*list_ants;
+	struct s_path	tab_path[10];
+	int				nb_path;
 }					t_graph;
 
 t_node				*create_node(int number, char *name);
