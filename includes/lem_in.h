@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 17:42:35 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 19:27:43 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct		s_ant
 {
 	struct s_ant	*next;
 	struct s_node	*path;
-	struct s_node	*current;
 }					t_ant;
 
 /*
@@ -74,9 +73,11 @@ typedef struct		s_graph
 	int				start;
 	int				end;
 	int				nb_ants;
+	int				index;
+	int				arrived;
 	int				nb_sommets;
 	struct s_node	*head;
-	struct s_ant	*list_ants;
+	struct s_path	**tab_ants;
 	struct s_path	tab_path[10];
 	int				nb_path;
 }					t_graph;

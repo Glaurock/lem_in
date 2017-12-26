@@ -6,24 +6,42 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 17:45:57 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 20:07:48 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_ant		*create_ant(t_graph *graph, t_node *path, t_node **tmp)
+/*
+** on cree une fourmi, on la push a la fin de la liste, 
+** on met la position a not_free
+*/
+
+void		create_ant(t_graph *graph, t_node *path, t_node **tmp)
 {
-	t_ant *ant;
+	t_path *ant;
 
-	ant = (t_ant*)ft_memalloc(sizeof(t_ant));
+	ant = (t_path*)ft_memalloc(sizeof(t_path));
+	//check malloc
 
-	ant->path = path;
-	ant->current = path->next;
-	ant->next = graph->list_ants;
-	graph->list_ants = ant;
+	/*current = graph->list_ants;
+	if (!current)
+	{
+		ant->next = NULL;
+		graph->list_ants = ant;
+	}
+	else
+	{
+		while (current->next)
+			current = current->next;
+		current->next = ant;
+		ant->next = NULL;
+	}*/
+	graph->tab_ants[graph->index] = ant;
+	ant->head_path = path->next;
 	(*tmp)->is_free = 0;
 	graph->nb_ants--;
+	graph->index++;
 }
 
 void		mark_path(t_graph *graph, t_node *path)
@@ -41,48 +59,49 @@ void		mark_path(t_graph *graph, t_node *path)
 	}
 }
 
-void		recursive_loop(t_graph *graph, int previous_dist)
+int		size_ants(t_ant *ant)
 {
-	t_node	*path;
-	int		size;
-	t_node	*tmp;
-	t_ant	*ant;
+	int i;
 
-	path = dijkstra_algo(graph, graph->start, graph->end); // to free
-
-	size = ft_path_size(path) - 1;
-	if (size < previous_dist || !graph->nb_ants || !path)
+	i = 0;
+	while (ant)
 	{
-		ft_dprintf(2, "out of recursive_loop\n");
-		return ;
+		i++;
+		ant = ant->next;
 	}
-	tmp = give_node(graph, path->next->number);
-	//ft_dprintf(2, "tmp node: %d\n", tmp->number);
-	
-	// pas fourmi devant
-	if (tmp->is_free)
-	{
-		//on cree une fourmi avec son path
-		ant = create_ant(graph, path, &tmp);
-		//on marque le chemin A FAIRE
-		mark_path(graph, path);
-	}
-	else
-		size += graph->nb_ants;
-	ft_dprintf(2, "size: %d\n", size);
-	//recursive_loop(graph, size);
+	return (i);
 }
 
 void	update_ants(t_graph *graph)
 {
-	t_ant	*ants;
 	t_node	*tmp;
+	int		i;
+	t_path	*ant;
+	t_path	*to_free;
 
-	ants = graph->list_ants;
-	while (ants)
+	i = -1;
+	while (++i < graph->index)
 	{
-		// move ants here
-		ants = ants->next;
+		//print_path(ant->path);
+		ant = graph->tab_ants[i];
+		if (!ant)
+			continue ;
+		tmp = give_node(graph, ant->head_path->number);
+		//ft_dprintf(2, "tmp :%d\n", tmp->number);
+		tmp->is_free = 1;
+		ant->head_path = ant->head_path->next;
+		if (ant->head_path->number == graph->end)
+		{
+			ft_dprintf(2, "Arrived!!!\n");
+			free(graph->tab_ants[i]);
+			graph->tab_ants[i] = NULL;
+			graph->arrived++;
+		}
+		else
+		{
+			tmp = give_node(graph, ant->head_path->number);
+			tmp->is_free = 0;
+		}
 	}
 }
 
@@ -115,31 +134,46 @@ void	game_loop(t_graph *graph)
 	int		i;
 	t_node	*path;
 	t_node	*node;
+	int		last_dist;
+
+	ft_dprintf(2, "------Start game loop-----\n\n");
 	//fonction update game : pour chaque fourmi, la mettre a la position suivante
-	//update_ants(graph);
+	update_ants(graph);
+	//ft_dprintf(2, "nb active ants: %d\n", size_ants(graph->list_ants));
 	//recursive_loop(graph, 0);
 	i = 0;
+	last_dist = 0;
 	while (graph->nb_ants && i < graph->nb_path)
 	{
 		path = graph->tab_path[i].head_path;
 		node = give_node(graph, path->next->number);
-		if (node->is_free)
+		//ft_dprintf(2, "last_dist: %d, actual_dist: %d\n", last_dist + graph->nb_ants, ft_path_size(path) - 1);
+		if (!i)
 			create_ant(graph, path, &node);
+		else if (node->is_free && last_dist + graph->nb_ants > ft_path_size(path) - 1)
+				create_ant(graph, path, &node);
 		i++;
+		last_dist = ft_path_size(path) - 1;
 	}
+	print_graph(graph);
+	ft_dprintf(2, "nb_ants : %d, arrived : %d\n", graph->nb_ants, graph->arrived);
 }
-
 
 int		main(int argc, char **argv)
 {
 	t_graph		*graph;
+	int			nb_start;
 
 	graph = (t_graph*)ft_memalloc(sizeof(t_graph));
 	get_input(graph);
 	ft_dprintf(2, "start : %d, end: %d\n", graph->start, graph->end);
 	find_all_path(graph);
-	game_loop(graph);
-	print_graph(graph);
+	graph->tab_ants = (t_path**)ft_memalloc(sizeof(t_path*) * (graph->nb_ants + 1));
+	nb_start = graph->nb_ants;
+	while (graph->arrived != nb_start)
+		game_loop(graph);
+	//print_graph(graph);
+	free(graph->tab_ants);
 	del_graph(graph);
 	return (0);
 }
