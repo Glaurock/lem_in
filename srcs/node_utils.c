@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 21:13:06 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 17:34:38 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 22:57:09 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,16 @@ int			ft_path_size(t_node *node)
 		i++;
 	}
 	return (i);
+}
+
+void		free_path(t_node *path)
+{
+	t_node	*tmp;
+
+	while (path)
+	{
+		tmp = path;
+		path = path->next;
+		free(tmp);
+	}
 }

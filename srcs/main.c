@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 20:07:48 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 22:59:09 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,15 @@ void		create_ant(t_graph *graph, t_node *path, t_node **tmp)
 	ant = (t_path*)ft_memalloc(sizeof(t_path));
 	//check malloc
 
-	/*current = graph->list_ants;
-	if (!current)
-	{
-		ant->next = NULL;
-		graph->list_ants = ant;
-	}
-	else
-	{
-		while (current->next)
-			current = current->next;
-		current->next = ant;
-		ant->next = NULL;
-	}*/
 	graph->tab_ants[graph->index] = ant;
 	ant->head_path = path->next;
 	(*tmp)->is_free = 0;
 	graph->nb_ants--;
 	graph->index++;
+	if (graph->space)
+		ft_printf(" ");
+	ft_printf("L%d-%d", graph->index, (*tmp)->number);
+	graph->space = 1;
 }
 
 void		mark_path(t_graph *graph, t_node *path)
@@ -57,19 +48,6 @@ void		mark_path(t_graph *graph, t_node *path)
 		}
 		path = path->next;
 	}
-}
-
-int		size_ants(t_ant *ant)
-{
-	int i;
-
-	i = 0;
-	while (ant)
-	{
-		i++;
-		ant = ant->next;
-	}
-	return (i);
 }
 
 void	update_ants(t_graph *graph)
@@ -90,6 +68,10 @@ void	update_ants(t_graph *graph)
 		//ft_dprintf(2, "tmp :%d\n", tmp->number);
 		tmp->is_free = 1;
 		ant->head_path = ant->head_path->next;
+		if (graph->space)
+			ft_printf(" ");
+		ft_printf("L%d-%d", i + 1, ant->head_path->number);
+		graph->space = 1;
 		if (ant->head_path->number == graph->end)
 		{
 			ft_dprintf(2, "Arrived!!!\n");
@@ -136,11 +118,11 @@ void	game_loop(t_graph *graph)
 	t_node	*node;
 	int		last_dist;
 
+	graph->space = 0;
 	ft_dprintf(2, "------Start game loop-----\n\n");
 	//fonction update game : pour chaque fourmi, la mettre a la position suivante
 	update_ants(graph);
 	//ft_dprintf(2, "nb active ants: %d\n", size_ants(graph->list_ants));
-	//recursive_loop(graph, 0);
 	i = 0;
 	last_dist = 0;
 	while (graph->nb_ants && i < graph->nb_path)
@@ -157,16 +139,19 @@ void	game_loop(t_graph *graph)
 	}
 	print_graph(graph);
 	ft_dprintf(2, "nb_ants : %d, arrived : %d\n", graph->nb_ants, graph->arrived);
+	ft_printf("\n");
 }
 
 int		main(int argc, char **argv)
 {
 	t_graph		*graph;
 	int			nb_start;
+	int			i;
 
 	graph = (t_graph*)ft_memalloc(sizeof(t_graph));
 	get_input(graph);
 	ft_dprintf(2, "start : %d, end: %d\n", graph->start, graph->end);
+	graph->tab_path = (t_path*)ft_memalloc(sizeof(t_path) * (graph->nb_ants));
 	find_all_path(graph);
 	graph->tab_ants = (t_path**)ft_memalloc(sizeof(t_path*) * (graph->nb_ants + 1));
 	nb_start = graph->nb_ants;
@@ -174,7 +159,10 @@ int		main(int argc, char **argv)
 		game_loop(graph);
 	//print_graph(graph);
 	free(graph->tab_ants);
+	i = -1;
+	while (++i < graph->nb_path)
+		free_path(graph->tab_path[i].head_path);
+	free(graph->tab_path);
 	del_graph(graph);
 	return (0);
 }
-//ft_dprintf(2, "start: %d, end: %d, nb_ants:%d\n", graph->start, graph->end, graph->nb_ants);

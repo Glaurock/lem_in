@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 19:27:43 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 22:57:18 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ typedef struct		s_graph
 	int				start;
 	int				end;
 	int				nb_ants;
+	int				nb_path;
 	int				index;
 	int				arrived;
 	int				nb_sommets;
+	int				space: 2;
 	struct s_node	*head;
-	struct s_path	**tab_ants;
-	struct s_path	tab_path[10];
-	int				nb_path;
+	struct s_path	**tab_ants; // un seul pointeur?
+	struct s_path	*tab_path;
 }					t_graph;
 
 t_node				*create_node(int number, char *name);
@@ -99,5 +100,6 @@ t_node				*dijkstra_algo(t_graph *graph, int start, int end);
 int			ft_path_size(t_node *node);
 void		ft_reverse_path(t_node **begin_list);
 void		print_path(t_node *path);
+void		free_path(t_node *path);
 
 #endif
