@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 10:41:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/25 10:37:09 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 23:08:25 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,15 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef enum
+{
+	false,
+	true
+}					e_bool;
+
 void				ft_swap_ptr(void **ptr1, void **ptr2);
 void				die(char *msg);
+void				mallcheck(void *param);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);

@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:22:01 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 17:25:05 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 23:26:12 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ t_node		*dijkstra_algo(t_graph *graph, int start, int end)
 
 	ft_dprintf(2, "--------Start aglo--------\n\n");
 	path = NULL;
-	tab[SEEN] = (int*)malloc(sizeof(int) * graph->nb_sommets);
-	tab[WEIGHT] = (int*)malloc(sizeof(int) * graph->nb_sommets);
-	tab_previous = (t_node**)malloc(sizeof(t_node*) * graph->nb_sommets);
+	mallcheck(tab[SEEN] = (int*)malloc(sizeof(int) * graph->nb_sommets));
+	mallcheck(tab[WEIGHT] = (int*)malloc(sizeof(int) * graph->nb_sommets));
+	mallcheck(tab_previous = (t_node**)malloc(sizeof(t_node*) * graph->nb_sommets));
 
 	i = -1;
 	while (++i < graph->nb_sommets)

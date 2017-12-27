@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:18:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 17:09:49 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 23:26:53 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_node				*create_node(int number, char *name)
 {
 	t_node		*new;
 
-	new = (t_node*)malloc(sizeof(t_node));
+	mallcheck(new = (t_node*)malloc(sizeof(t_node)));
 	//check malloc
 
 	new->number = number;
@@ -49,7 +49,7 @@ t_edge				*new_edge(t_node *links_to)
 {
 	t_edge		*edge;
 
-	edge = (t_edge*)malloc(sizeof(t_edge));
+	mallcheck(edge = (t_edge*)malloc(sizeof(t_edge)));
 	//check malloc
 
 	edge->next = NULL;

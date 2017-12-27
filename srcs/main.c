@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 22:59:09 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 23:27:47 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		create_ant(t_graph *graph, t_node *path, t_node **tmp)
 {
 	t_path *ant;
 
-	ant = (t_path*)ft_memalloc(sizeof(t_path));
+	mallcheck(ant = (t_path*)ft_memalloc(sizeof(t_path)));
 	//check malloc
 
 	graph->tab_ants[graph->index] = ant;
@@ -148,12 +148,12 @@ int		main(int argc, char **argv)
 	int			nb_start;
 	int			i;
 
-	graph = (t_graph*)ft_memalloc(sizeof(t_graph));
+	mallcheck(graph = (t_graph*)ft_memalloc(sizeof(t_graph)));
 	get_input(graph);
 	ft_dprintf(2, "start : %d, end: %d\n", graph->start, graph->end);
-	graph->tab_path = (t_path*)ft_memalloc(sizeof(t_path) * (graph->nb_ants));
+	mallcheck(graph->tab_path = (t_path*)ft_memalloc(sizeof(t_path) * (graph->nb_ants)));
 	find_all_path(graph);
-	graph->tab_ants = (t_path**)ft_memalloc(sizeof(t_path*) * (graph->nb_ants + 1));
+	mallcheck(graph->tab_ants = (t_path**)ft_memalloc(sizeof(t_path*) * (graph->nb_ants + 1)));
 	nb_start = graph->nb_ants;
 	while (graph->arrived != nb_start)
 		game_loop(graph);

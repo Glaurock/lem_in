@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 22:57:18 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/26 23:25:39 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@
 
 # define WEIGHT 0
 # define SEEN 1
-
-typedef enum
-{
-	false,
-	true
-}				e_bool;
 
 /*
 ** struct ants, qui contient le chemin que la fourmi doit emprunter
@@ -54,7 +48,6 @@ typedef struct		s_node
 	char			*name;
 	int				is_free :2;
 	int				is_a_path: 2;
-	//int				weight;
 	struct s_edge	*edges_l;
 	struct s_node	*next;
 }					t_node;
