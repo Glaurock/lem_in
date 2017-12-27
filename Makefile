@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2017/12/26 20:12:56 by gmonnier         ###   ########.fr        #
+#    Updated: 2017/12/27 14:52:30 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC = \
 	graph.c \
 	node_utils.c \
 	input.c \
-	dijkstra.c
+	dijkstra.c \
+	algo_utils.c
 
 LIB = ./libft/libft.a \
 
@@ -72,4 +73,4 @@ $(LIB):
 	make -C $(@D)
 
 test: all
-	./$(NAME) < test3.txt
+	./$(NAME) < test2.txt

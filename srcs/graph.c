@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:18:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 23:26:53 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/27 15:40:57 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,11 @@ t_node				*create_node(int number, char *name)
 {
 	t_node		*new;
 
-	mallcheck(new = (t_node*)malloc(sizeof(t_node)));
-	//check malloc
+	mallcheck(new = (t_node*)ft_memalloc(sizeof(t_node)));
 
 	new->number = number;
 	new->is_free = 1;
-	new->is_a_path = 0;
 	new->name = ft_strdup(name);
-	new->next = NULL;
-	new->edges_l = NULL;
 	return (new);
 }
 

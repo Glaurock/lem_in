@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 21:13:06 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 22:57:09 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/27 16:07:08 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,15 @@ void		free_path(t_node *path)
 		path = path->next;
 		free(tmp);
 	}
+}
+
+void		push_path(t_node **head, t_node *path) // FREE
+{
+	t_node *copy;
+
+	mallcheck(copy = (t_node*)malloc(sizeof(t_node)));
+	//ft_memcpy(copy, path, sizeof(t_node));
+	copy->number = path->number;
+	copy->next = *head;
+	*head = copy;
 }
