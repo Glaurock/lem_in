@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/28 09:27:35 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:33:19 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # define WEIGHT 0
 # define SEEN 1
 # define PATH 2
+
+
+# define ENDL ft_dprintf(2, "\n----------\n");
 
 /*
 ** la liste des liens
@@ -77,7 +80,7 @@ typedef struct		s_graph
 	struct s_path	*tab_path;
 	t_list			*list_paths;
 	t_list			*list_tmp;
-	int				*tab_weight;
+	int				*tab[3];
 }					t_graph;
 
 t_node				*create_node(int number, char *name);
@@ -105,8 +108,10 @@ void		free_path(t_node *path);
 
 int			unreacheable_check(int **tab, int size);
 int			check_false(int *tab, int size);
+int			check_true(int *tab, int size);
 void		print_tab_previous(t_node **tab_previous, int size);
 void		print_weight(int **tab, int size);
+void		print_tab(int *tab, int size);
 
 void		reverse_tab(int *tab, int size);
 

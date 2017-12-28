@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:22:01 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/28 09:26:42 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/28 10:43:22 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void		reverse_tab(int *tab, int size)
 
 void			give_weight(t_graph *graph, int start, int end)
 {
-	int		*tab[2];
 	int		i;
 	t_node	*current;
 	t_edge	*edge;
@@ -83,25 +82,25 @@ void			give_weight(t_graph *graph, int start, int end)
 
 	ft_dprintf(2, "--------Start aglo--------\n\n");
 
-	mallcheck(tab[SEEN] = (int*)malloc(sizeof(int) * graph->nb_sommets));
-	mallcheck(tab[WEIGHT] = (int*)malloc(sizeof(int) * graph->nb_sommets));
+	mallcheck(graph->tab[SEEN] = (int*)malloc(sizeof(int) * graph->nb_sommets));
+	mallcheck(graph->tab[WEIGHT] = (int*)malloc(sizeof(int) * graph->nb_sommets));
 
 	i = -1;
 	while (++i < graph->nb_sommets)
 	{
-		tab[WEIGHT][i] = -1;
-		tab[SEEN][i] = false;
+		graph->tab[WEIGHT][i] = -1;
+		graph->tab[SEEN][i] = false;
 	}
-	tab[WEIGHT][start] = 0;
+	graph->tab[WEIGHT][start] = 0;
 
 	// tant qu on a pas parcouru tous les noeuds
 
-	i_father = get_index_min_weight(tab, graph->nb_sommets);
+	i_father = get_index_min_weight(graph->tab, graph->nb_sommets);
 	i = 0;
-	while (check_false(tab[SEEN], graph->nb_sommets))
+	while (check_false(graph->tab[SEEN], graph->nb_sommets))
 	{
 		//ft_dprintf(2, "i_father : %d\n", i_father);
-		tab[SEEN][i_father] = true;
+		graph->tab[SEEN][i_father] = true;
 
 		// on parcours les fils du noeud
 
@@ -116,26 +115,21 @@ void			give_weight(t_graph *graph, int start, int end)
 			//ft_dprintf(2, "i_son : %d\n", i_son);
 			// si le noeud n'a pas encore ete parcouru 
 			//{
-				if (tab[WEIGHT][i_son] == -1 ||
-				(tab[WEIGHT][i_father] + 1 <= tab[WEIGHT][i_son]))
+				if (graph->tab[WEIGHT][i_son] == -1 ||
+				(graph->tab[WEIGHT][i_father] + 1 <= graph->tab[WEIGHT][i_son]))
 				{
-					if (tab[SEEN][i_son] == false)
-						tab[WEIGHT][i_son] = tab[WEIGHT][i_father] + 1;
+					if (graph->tab[SEEN][i_son] == false)
+						graph->tab[WEIGHT][i_son] = graph->tab[WEIGHT][i_father] + 1;
 				}
 			//}
 			edge = edge->next;
 		}
 		// check for unreacheable nodes
-		i_father = get_index_min_weight(tab, graph->nb_sommets);
-		if (!unreacheable_check(tab, graph->nb_sommets))
-		{
-			free(tab[SEEN]);
+		i_father = get_index_min_weight(graph->tab, graph->nb_sommets);
+		if (!unreacheable_check(graph->tab, graph->nb_sommets))
 			return ; // probleme ici 
-		}
 	}
-	print_weight(tab, graph->nb_sommets);
-	graph->tab_weight = tab[WEIGHT];
-	free(tab[SEEN]);
+	print_weight(graph->tab, graph->nb_sommets);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 14:46:24 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/27 14:47:05 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/28 17:17:31 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,6 @@ void		print_weight(int **tab, int size)
 	{
 		ft_dprintf(2, "weight[%d]: %-3d || %s\n", i, tab[WEIGHT][i], tab[SEEN][i] == true ? "true" : "false" );
 	}
-}
-
-void		print_tab_previous(t_node **tab_previous, int size)
-{
-	int i;
-
-	ft_dprintf(2, "\nprint tab_previous :\n");
-	i = -1;
-	while (++i < size)
-	{
-		ft_dprintf(2, "Node : (%d) || ", i);
-		print_path(tab_previous[i]);
-	}
-
 }
 
 int			unreacheable_check(int **tab, int size)
@@ -68,4 +54,27 @@ int			check_false(int *tab, int size)
 	return (count == 1 ? 0 : 1);
 }
 
+int			check_true(int *tab, int size)
+{
+	int i;
 
+	i = 0;
+	while (++i < size)
+	{
+		if (tab[i] == true)
+			return (0);
+	}
+	return (1);
+}
+
+void		print_tab(int *tab, int size)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+	{
+		ft_dprintf(2, "(%d) || ", tab[i]);
+	}
+	ft_dprintf(2, "\n");
+}

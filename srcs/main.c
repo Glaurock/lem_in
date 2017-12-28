@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/28 09:27:02 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/28 14:35:48 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,6 @@ void		create_ant(t_graph *graph, int *map, t_node **tmp)
 		ft_printf(" ");
 	ft_printf("L%d-%d", graph->index, (*tmp)->number);
 	graph->space = 1;
-}
-
-void		mark_path(t_graph *graph)
-{
-	int		*tab;
-	int		i;
-	t_node	*node;
-
-	tab = (int*)(graph->list_paths->content);
-	i = -1;
-	while (++i < graph->nb_sommets)
-	{
-		if (tab[i] != graph->end && tab[i] != graph->start)
-		{
-			node = give_node(graph, tab[i]);
-			node->is_a_path = 1;
-		}
-	}
 }
 
 void	update_ants(t_graph *graph)
