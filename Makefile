@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2017/12/27 14:52:30 by gmonnier         ###   ########.fr        #
+#    Updated: 2017/12/28 09:22:39 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRC = \
 	node_utils.c \
 	input.c \
 	dijkstra.c \
-	algo_utils.c
+	algo_utils.c \
+	dfs.c
 
 LIB = ./libft/libft.a \
 

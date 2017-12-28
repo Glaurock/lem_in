@@ -6,28 +6,11 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/27 19:02:57 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/28 09:27:02 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-t_list	*ft_list_at(t_list *begin_list, unsigned int nbr)
-{
-	unsigned int i;
-
-	i = 0;
-	if (!begin_list)
-		return (0);
-	while (begin_list && i < nbr)
-	{
-		begin_list = begin_list->next;
-		i++;
-	}
-	if (i > nbr)
-		return (0);
-	return (begin_list);
-}
 
 /*
 ** on cree une fourmi, on la push a la fin de la liste, 
@@ -126,24 +109,6 @@ int		check_all_tag(t_graph *graph)
 ** quand la taille du chemin est superieur au chemin mini + nb_ants ( non implementer )
 */
 
-void	find_all_path(t_graph *graph)
-{
-	//t_node	*path;
-	int		i;
-
-	//ft_bzero((void*)graph->tab_path, sizeof(graph->tab_path));
-	i = 0;
-	while (i < 2 && dijkstra_algo(graph, graph->start, graph->end))
-	{
-		mark_path(graph);
-		i++;
-		graph->nb_path++;
-		if (!check_all_tag(graph))
-			break ;
-		//print_path(graph->tab_path[graph->nb_path - 1].head_path);
-	}
-}
-
 /*
 ** a chaque tour, on remplit tous les chemins (pas bon ca???)
 */
@@ -196,8 +161,8 @@ int		main(int argc, char **argv)
 	find_all_path(graph);
 	mallcheck(graph->tab_ants = (t_ant**)ft_memalloc(sizeof(t_ant*) * (graph->nb_ants + 1)));
 	nb_start = graph->nb_ants;
-	while (graph->arrived != nb_start)
-		game_loop(graph);
+	//while (graph->arrived != nb_start)
+	//	game_loop(graph);
 	//print_graph(graph);
 	free(graph->tab_ants);
 	//i = -1;

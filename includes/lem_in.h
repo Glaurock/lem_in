@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/27 18:53:34 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/28 09:27:35 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ typedef struct		s_node
 	char			*name;
 	int				is_free :2;
 	int				is_a_path: 2;
+	int				weight;
 	struct s_edge	*edges_l;
 	struct s_node	*next;
+	int				seen: 2;
 }					t_node;
 
 typedef struct		s_path
@@ -73,9 +75,9 @@ typedef struct		s_graph
 	struct s_node	*head;
 	t_ant			**tab_ants;
 	struct s_path	*tab_path;
-	//struct s_path	*list_paths;
 	t_list			*list_paths;
 	t_list			*list_tmp;
+	int				*tab_weight;
 }					t_graph;
 
 t_node				*create_node(int number, char *name);
@@ -89,6 +91,7 @@ t_node				*give_node(t_graph *graph, int number);
 void				get_input(t_graph *graph);
 
 /* algo */
+void			give_weight(t_graph *graph, int start, int end);
 int					dijkstra_algo(t_graph *graph, int start, int end);
 void				push_path(t_node **head, t_node *path);
 void				select_path(t_graph *graph);
@@ -106,4 +109,15 @@ void		print_tab_previous(t_node **tab_previous, int size);
 void		print_weight(int **tab, int size);
 
 void		reverse_tab(int *tab, int size);
+
+
+/*algo recursif*/
+
+void	find_all_path(t_graph *graph);
+
+/*fonction basique de liste*/
+
+void		push_back(t_list **head, t_list *new_elem);
+t_list	*ft_list_at(t_list *begin_list, unsigned int nbr);
+
 #endif
