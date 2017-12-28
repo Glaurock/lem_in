@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:22:28 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/28 18:08:17 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/28 18:23:53 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void		depth_first_search(t_graph *graph, t_node *current, int **tab, int *path_i
 	t_edge	*edge;
 	//int		*copy_tab;
 
-	//print_weight(tab, graph->nb_sommets);
+	print_weight(tab, graph->nb_sommets);
 	tab[SEEN][current->number] = true;
 	tab[PATH][*path_index] = current->number;
 	(*path_index)++;
@@ -135,8 +135,10 @@ t_list		*select_best_path(t_graph *graph)
 	ft_memset(graph->tab[SEEN], false, sizeof(int) * graph->nb_sommets);
 	depth_first_search(graph, give_node(graph, graph->end), graph->tab, &path_index);
 	ft_dprintf(2, "size list_tmp: %d\n", ft_lst_size(graph->list_tmp));
-	ft_dprintf(2, "test size: %d\n", count_path_size((int*)graph->list_tmp->content, graph->nb_sommets, graph->end));
+	//ft_dprintf(2, "test size: %d\n", count_path_size((int*)graph->list_tmp->content, graph->nb_sommets, graph->end));
 
+	if (graph->list_tmp == NULL)
+		return (NULL);
 	//ENDL;
 	if (ft_lst_size(graph->list_tmp) == 1)
 	{
@@ -149,13 +151,16 @@ t_list		*select_best_path(t_graph *graph)
 		save_list_tmp = graph->list_tmp;
 		current = graph->list_tmp;
 		graph->list_tmp = NULL;
-		//while (current)
-	//	{
+		while (current)
+		{
 			mark_path(graph, (int*)current->content);
 			
 			print_list_tmp(save_list_tmp, graph->nb_sommets);
 			test = select_best_path(graph);
-			size = count_path_size((int*)test->content, graph->nb_sommets, graph->end);
+			if (!test)
+				size = 90000000;
+			else
+				size = count_path_size((int*)test->content, graph->nb_sommets, graph->end);
 			ft_dprintf(2, "size path de test: %d\n", size);
 			if (size < min_size)
 			{
@@ -163,9 +168,10 @@ t_list		*select_best_path(t_graph *graph)
 				save_best_ptr = test;
 			}
 			unmark_path(graph, (int*)current->content);
-	//		current = current->next;
-	//	}
+			current = current->next;
+		}
 		save_best = ft_lstnew(save_best_ptr->content, save_best_ptr->content_size);
+		ft_lstdel(&test, &free_tab_in_list);
 		ft_lstdel(&save_list_tmp, &free_tab_in_list);
 		return (save_best);
 	}
@@ -184,7 +190,7 @@ void	find_all_path(t_graph *graph)
 	give_weight(graph, graph->start, graph->end);
 	list = select_best_path(graph);
 
-	
+	print_tab((int*)list->content, graph->nb_sommets);
 	//while (i < 2 && dijkstra_algo(graph, graph->start, graph->end))
 //	{
 //		mark_path(graph);
