@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:19:31 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 15:25:31 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:22:20 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,35 @@ static void	read_edge(t_graph *graph, char *line)
 {
 	if (ft_strchr(line, '-') == 0)
 		free_all(graph, "Error to read edges");
-	get_edge(graph, line);
+	if (line[0] != '#')
+		get_edge(graph, line);
 	ft_memdel((void**)&line);
 	while (get_next_line(0, &line) > 0)
 	{
-		get_edge(graph, line);
-		ft_memdel((void**)&line);
+		if (line[0] != '#')
+		{
+			get_edge(graph, line);
+			ft_memdel((void**)&line);
+		}
+	}
+}
+
+void	special_char(t_graph *graph, char **line, int *check)
+{
+	int a;
+
+	a= 0;
+	if (ft_strcmp(*line, "##start") == 0)
+		a = 1;
+	else if (ft_strcmp(*line, "##end") == 0)
+		a = 2;
+	free(*line);
+	if (a)
+	{
+		get_next_line(0, line);
+		a == 1 ? graph->start = graph->nb_sommets : 0;
+		a == 2 ? graph->end = graph->nb_sommets : 0;
+		(*check)++;
 	}
 }
 
@@ -72,20 +95,8 @@ void	get_input(t_graph *graph)
 	{
 		if (ft_strchr(line, '-'))
 			break ;
-		if (ft_strcmp(line, "##start") == 0)
-		{
-			free(line);
-			get_next_line(0, &line);
-			graph->start = graph->nb_sommets;
-			check++;
-		}
-		if (ft_strcmp(line, "##end") == 0)
-		{
-			free(line);
-			get_next_line(0, &line);
-			graph->end = graph->nb_sommets;
-			check++;
-		}
+		if (line[0] == '#')
+			special_char(graph, &line, &check);
 		i = 0;
 		while (line[i] && line[i] != ' ')
 			i++;

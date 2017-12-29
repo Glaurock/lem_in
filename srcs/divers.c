@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 09:37:47 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 12:12:42 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:32:17 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	find_nb_path(t_graph *graph)
 		nb2++;
 		edge = edge->next;
 	}
+	ft_dprintf(2, "nb1: %d, nb2: %d\n", nb, nb2);
 	graph->nb_path = nb > nb2 ? nb2 : nb;
 }
 
