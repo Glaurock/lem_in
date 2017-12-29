@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 09:37:47 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 11:50:12 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 12:12:42 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	ft_lstadd_end(t_list **head, t_list *elem)
 void		mark_path(t_graph *graph, int *tab)
 {
 	int		i;
+	t_node	*node;
 
 	i = -1;
 	while (++i < graph->nb_sommets)
@@ -102,15 +103,19 @@ void		mark_path(t_graph *graph, int *tab)
 		if (tab[i] == graph->end)
 			return ;
 		if (tab[i] != graph->start)
-			graph->tab[WEIGHT][tab[i]] += TAG;
+		{
+			node = give_node(graph, tab[i]);
+			node->is_a_path = 1;
+			//graph->tab[WEIGHT][tab[i]] += TAG;
+		}
 	}
-	ENDL
 }
 
 
 void		unmark_path(t_graph *graph, int *tab)
 {
 	int		i;
+	t_node	*node;
 
 	i = -1;
 	while (++i < graph->nb_sommets)
@@ -118,7 +123,10 @@ void		unmark_path(t_graph *graph, int *tab)
 		if (tab[i] == graph->end)
 			return ;
 		if (tab[i] != graph->start)
-			graph->tab[WEIGHT][tab[i]] -= TAG;
+		{
+			node = give_node(graph, tab[i]);
+			node->is_a_path = 0;
+		}
 	}
 }
 

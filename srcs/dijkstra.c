@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:22:01 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 10:02:09 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 13:36:13 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void			give_weight(t_graph *graph, int start, int end)
 	int		i_father;
 	t_node	*tmp_check;
 
-	ft_dprintf(2, "--------Start aglo--------\n\n");
+	ft_dprintf(2, "--------Start weight--------\n\n");
 
 	mallcheck(graph->tab[SEEN] = (int*)malloc(sizeof(int) * graph->nb_sommets));
 	mallcheck(graph->tab[WEIGHT] = (int*)malloc(sizeof(int) * graph->nb_sommets));
@@ -77,6 +77,7 @@ void			give_weight(t_graph *graph, int start, int end)
 		graph->tab[SEEN][i] = false;
 	}
 	graph->tab[WEIGHT][start] = 0;
+
 
 	// tant qu on a pas parcouru tous les noeuds
 
@@ -90,6 +91,10 @@ void			give_weight(t_graph *graph, int start, int end)
 		// on parcours les fils du noeud
 
 		current = give_node(graph, i_father);
+
+		/* poids plus fort pour les nodes de path */
+		if (current->is_a_path)
+			graph->tab[WEIGHT][current->number] += TAG;
 
 		//ft_dprintf(2, "current: %d\n", current->number);
 		edge = current->edges_l;
@@ -111,8 +116,8 @@ void			give_weight(t_graph *graph, int start, int end)
 		}
 		// check for unreacheable nodes
 		i_father = get_index_min_weight(graph->tab, graph->nb_sommets);
-		if (!unreacheable_check(graph->tab, graph->nb_sommets))
-			return ; // probleme ici 
+		//if (!unreacheable_check(graph->tab, graph->nb_sommets))
+		//	return ; // probleme ici 
 	}
-	print_weight(graph->tab, graph->nb_sommets);
+	//print_weight(graph->tab, graph->nb_sommets);
 }

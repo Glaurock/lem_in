@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 11:40:36 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 13:36:19 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,8 @@ int		main(int argc, char **argv)
 	find_all_path(graph);
 	mallcheck(graph->tab_ants = (t_ant**)ft_memalloc(sizeof(t_ant*) * (graph->nb_ants + 1)));
 	nb_start = graph->nb_ants;
-	//while (graph->arrived != nb_start)
-	//	game_loop(graph);
+	while (graph->arrived != nb_start)
+		game_loop(graph);
 	//print_graph(graph);
 	free(graph->tab_ants);
 	free(graph->tab_path);

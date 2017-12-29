@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 14:46:24 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 10:35:20 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 13:33:34 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,15 @@ int			unreacheable_check(int **tab, int size)
 
 int			check_false(int *tab, int size)
 {
-	int count;
 	int i;
 
-	count = 0;
 	i = -1;
 	while (++i < size)
 	{
 		if (tab[i] == false)
-			count++;
+			return (1);
 	}
-	return (count == 1 ? 0 : 1);
+	return (0);
 }
 
 int			check_true(int *tab, int size)
