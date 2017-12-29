@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:19:31 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/25 17:04:36 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 15:25:31 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,21 @@ static void	get_edge(t_graph *graph, char *line)
 	node2 = give_node_name(graph, name2);
 	//ft_dprintf(2, "name1: %s, name2: %s\n", name1, name2);
 	//ft_dprintf(2, "node1: %s, node2: %s\n", node1->name, node2->name);
-	add_edge(give_node_name(graph, name1), give_node_name(graph, name2));
+	if (!node1 || !node2)
+		free_all(graph, "Can't add edge and/or unknow node");
+	add_edge(node1, node2);
 }
 
 static void	read_edge(t_graph *graph, char *line)
 {
+	if (ft_strchr(line, '-') == 0)
+		free_all(graph, "Error to read edges");
 	get_edge(graph, line);
-	free(line);
+	ft_memdel((void**)&line);
 	while (get_next_line(0, &line) > 0)
 	{
 		get_edge(graph, line);
-		free(line);
+		ft_memdel((void**)&line);
 	}
 }
 
@@ -48,13 +52,15 @@ void	get_input(t_graph *graph)
 {
 	char	*line;
 	int		i;
+	int		check;
 
-	get_next_line(0, &line);
-	//ft_dprintf(2, "%s\n", line);
+	check = 0;
+	if (get_next_line(0, &line) <= 0)
+		free_all(graph, "Can't read input and/or empty input");
 	if (!ft_isdigit(line[0]))
 	{
 		free(line);
-		die("can't get ants number");
+		free_all(graph, "Can't get ants number");
 	}
 	else
 	{
@@ -64,7 +70,6 @@ void	get_input(t_graph *graph)
 	}
 	while (get_next_line(0, &line) > 0)
 	{
-		//ft_dprintf(2, "line dans boucle: %s\n", line);
 		if (ft_strchr(line, '-'))
 			break ;
 		if (ft_strcmp(line, "##start") == 0)
@@ -72,12 +77,14 @@ void	get_input(t_graph *graph)
 			free(line);
 			get_next_line(0, &line);
 			graph->start = graph->nb_sommets;
+			check++;
 		}
 		if (ft_strcmp(line, "##end") == 0)
 		{
 			free(line);
 			get_next_line(0, &line);
 			graph->end = graph->nb_sommets;
+			check++;
 		}
 		i = 0;
 		while (line[i] && line[i] != ' ')
@@ -89,4 +96,6 @@ void	get_input(t_graph *graph)
 		graph->nb_sommets++;
 	}
 	read_edge(graph, line);
+	if (graph->start == graph->end || check != 2)
+		free_all(graph, "Error input start and/or end");
 }

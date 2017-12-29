@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2017/12/29 09:39:00 by gmonnier         ###   ########.fr        #
+#    Updated: 2017/12/29 14:28:16 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ SRC = \
 	dijkstra.c \
 	algo_utils.c \
 	dfs.c \
-	divers.c
+	divers.c \
+	free_n_error.c \
+	ants.c 
 
 LIB = ./libft/libft.a \
 

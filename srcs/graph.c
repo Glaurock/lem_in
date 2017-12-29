@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:18:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/28 18:57:41 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 14:58:08 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ t_edge				*new_edge(t_node *links_to)
 	t_edge		*edge;
 
 	mallcheck(edge = (t_edge*)malloc(sizeof(t_edge)));
-	//check malloc
 
 	edge->next = NULL;
 	edge->links_to = links_to;
@@ -57,6 +56,8 @@ void				add_edge(t_node *n1, t_node *n2)
 {
 	t_edge		*edge;
 
+	if (!n1 || !n2)
+		die("Can't add edge");
 	edge = new_edge(n2);
 	edge->next = n1->edges_l;
 	n1->edges_l = edge;
@@ -90,7 +91,7 @@ void				del_graph(t_graph *graph)
 		free(tmp->name);
 		free(tmp);
 	}
-	free(graph);
+	ft_memdel((void**)&graph);
 }
 
 void				print_graph(t_graph *graph)

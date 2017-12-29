@@ -6,93 +6,15 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 13:36:19 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 15:28:38 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 /*
-** on cree une fourmi, on la push a la fin de la liste, 
-** on met la position a not_free
-*/
-
-void		create_ant(t_graph *graph, int *map, t_node **tmp)
-{
-	t_ant *ant;
-
-	mallcheck(ant = (t_ant*)ft_memalloc(sizeof(t_ant)));
-	//check malloc
-
-	graph->tab_ants[graph->index] = ant;
-	ant->map = map;
-	ant->index = 1;
-	(*tmp)->is_free = 0;
-	graph->nb_ants--;
-	graph->index++;
-	if (graph->space)
-		ft_printf(" ");
-	ft_printf("L%d-%d", graph->index, (*tmp)->number);
-	graph->space = 1;
-}
-
-void	update_ants(t_graph *graph)
-{
-	t_node	*tmp;
-	int		i;
-	t_ant	*ant;
-
-	i = -1;
-	while (++i < graph->index)
-	{
-		//print_path(ant->path);
-		ant = graph->tab_ants[i];
-		if (!ant)
-			continue ;
-		tmp = give_node(graph, ant->map[ant->index]);
-		//ft_dprintf(2, "tmp :%d\n", tmp->number);
-		tmp->is_free = 1;
-		ant->index++;
-		if (graph->space)
-			ft_printf(" ");
-		ft_printf("L%d-%d", i + 1, ant->map[ant->index]);
-		graph->space = 1;
-		if (ant->map[ant->index] == graph->end)
-		{
-			//ft_dprintf(2, "Arrived!!!\n");
-			free(graph->tab_ants[i]);
-			graph->tab_ants[i] = NULL;
-			graph->arrived++;
-		}
-		else
-		{
-			tmp = give_node(graph, ant->map[ant->index]);
-			tmp->is_free = 0;
-		}
-	}
-}
-
-int		check_all_tag(t_graph *graph)
-{
-	t_node *node;
-
-	node = graph->head;
-	while (node)
-	{
-		if (node->number != graph->start && node->number != graph->end && !node->is_a_path)
-			return (1);
-		node = node->next;
-	}
-	return (0);
-}
-
-/*
 ** on s'arrete quand on a trouver tous les chemins possibles ou 
 ** quand la taille du chemin est superieur au chemin mini + nb_ants ( non implementer )
-*/
-
-/*
-** a chaque tour, on remplit tous les chemins (pas bon ca???)
 */
 
 void	game_loop(t_graph *graph)
@@ -139,15 +61,12 @@ int		main(int argc, char **argv)
 	mallcheck(graph = (t_graph*)ft_memalloc(sizeof(t_graph)));
 	get_input(graph);
 	ft_dprintf(2, "start : %d, end: %d\n", graph->start, graph->end);
-	mallcheck(graph->tab_path = (t_path*)ft_memalloc(sizeof(t_path) * (graph->nb_ants)));
 	find_all_path(graph);
 	mallcheck(graph->tab_ants = (t_ant**)ft_memalloc(sizeof(t_ant*) * (graph->nb_ants + 1)));
 	nb_start = graph->nb_ants;
 	while (graph->arrived != nb_start)
 		game_loop(graph);
 	//print_graph(graph);
-	free(graph->tab_ants);
-	free(graph->tab_path);
-	del_graph(graph);
+	free_all(graph, 0);
 	return (0);
 }
