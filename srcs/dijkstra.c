@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:22:01 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 13:36:13 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 18:07:26 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void			give_weight(t_graph *graph, int start, int end)
 	i = 0;
 	while (check_false(graph->tab[SEEN], graph->nb_sommets))
 	{
+		print_weight(graph->tab, graph->nb_sommets);
 		//ft_dprintf(2, "i_father : %d\n", i_father);
 		graph->tab[SEEN][i_father] = true;
 
@@ -116,8 +117,7 @@ void			give_weight(t_graph *graph, int start, int end)
 		}
 		// check for unreacheable nodes
 		i_father = get_index_min_weight(graph->tab, graph->nb_sommets);
-		//if (!unreacheable_check(graph->tab, graph->nb_sommets))
-		//	return ; // probleme ici 
+		if (!unreacheable_check(graph->tab, graph->nb_sommets))
+			return ; // probleme ici 
 	}
-	//print_weight(graph->tab, graph->nb_sommets);
 }

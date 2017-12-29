@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 15:28:38 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 17:58:27 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	game_loop(t_graph *graph)
 	{
 		map = (int*)(list->content);
 		node = give_node(graph, map[1]);
-		//ft_dprintf(2, "last_dist: %d, actual_dist: %d\n", last_dist + graph->nb_ants, ft_path_size(path) - 1);
+		//ft_dprintf(2, "test boucle");
 		if (!i)
 			create_ant(graph, map, &node);
 		else if (node->is_free && last_dist + graph->nb_ants > count_path_size(map, graph->nb_sommets, graph->end) - 1)
