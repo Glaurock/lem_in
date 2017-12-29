@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:22:28 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/28 18:23:53 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/28 19:19:49 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		depth_first_search(t_graph *graph, t_node *current, int **tab, int *path_i
 	(*path_index)++;
 	if (current->number == graph->start)
 	{
+		ft_dprintf(2, "Shortest path find: ");
 		for (int i = 0; i < *path_index; i++)
 			ft_dprintf(2, "%d | ", tab[PATH][i]);
 		ft_dprintf(2, "\n");
@@ -64,10 +65,13 @@ void		mark_path(t_graph *graph, int *tab)
 	i = -1;
 	while (++i < graph->nb_sommets)
 	{
-		if (tab[i] != graph->end && tab[i] != graph->start)
+		if (tab[i] == graph->end)
 		{
-			graph->tab[WEIGHT][tab[i]] += 5000;
+			ENDL
+			return ;
 		}
+		if (tab[i] != graph->start)
+			graph->tab[WEIGHT][tab[i]] += 5000;
 	}
 	ENDL
 }
@@ -80,10 +84,13 @@ void		unmark_path(t_graph *graph, int *tab)
 	i = -1;
 	while (++i < graph->nb_sommets)
 	{
-		if (tab[i] != graph->end && tab[i] != graph->start)
+		if (tab[i] == graph->end)
 		{
-			graph->tab[WEIGHT][tab[i]] -= 5000;
+			ENDL
+			return ;
 		}
+		if (tab[i] != graph->start)
+			graph->tab[WEIGHT][tab[i]] -= 5000;
 	}
 }
 
@@ -128,13 +135,14 @@ t_list		*select_best_path(t_graph *graph)
 	t_list	*save_best_ptr;
 	int		size;
 	t_list	*save_list_tmp;
-	static int i = 0;
 
-	min_size = 90000000;
+	min_size = MAX_SIZE;
 	path_index = 0;
 	ft_memset(graph->tab[SEEN], false, sizeof(int) * graph->nb_sommets);
 	depth_first_search(graph, give_node(graph, graph->end), graph->tab, &path_index);
-	ft_dprintf(2, "size list_tmp: %d\n", ft_lst_size(graph->list_tmp));
+	save_best_ptr = NULL;
+	save_best = NULL;
+	//ft_dprintf(2, "size list_tmp: %d\n", ft_lst_size(graph->list_tmp));
 	//ft_dprintf(2, "test size: %d\n", count_path_size((int*)graph->list_tmp->content, graph->nb_sommets, graph->end));
 
 	if (graph->list_tmp == NULL)
@@ -154,11 +162,10 @@ t_list		*select_best_path(t_graph *graph)
 		while (current)
 		{
 			mark_path(graph, (int*)current->content);
-			
 			print_list_tmp(save_list_tmp, graph->nb_sommets);
 			test = select_best_path(graph);
 			if (!test)
-				size = 90000000;
+				size = MAX_SIZE;
 			else
 				size = count_path_size((int*)test->content, graph->nb_sommets, graph->end);
 			ft_dprintf(2, "size path de test: %d\n", size);
@@ -170,12 +177,55 @@ t_list		*select_best_path(t_graph *graph)
 			unmark_path(graph, (int*)current->content);
 			current = current->next;
 		}
-		save_best = ft_lstnew(save_best_ptr->content, save_best_ptr->content_size);
+		if (save_best_ptr)
+			save_best = ft_lstnew(save_best_ptr->content, save_best_ptr->content_size);
 		ft_lstdel(&test, &free_tab_in_list);
 		ft_lstdel(&save_list_tmp, &free_tab_in_list);
 		return (save_best);
 	}
-	return (NULL);
+}
+
+void	find_nb_path(t_graph *graph)
+{
+	int		nb;
+	int		nb2;
+	t_node	*current;
+	t_edge	*edge;
+
+	nb = 0;
+	current = give_node(graph, graph->start);
+	edge = current->edges_l;
+	while (edge)
+	{
+		nb++;
+		edge = edge->next;
+	}
+	nb2 = 0;
+	current = give_node(graph, graph->end);
+	edge = current->edges_l;
+	while (edge)
+	{
+		nb2++;
+		edge = edge->next;
+	}
+	graph->nb_path = nb > nb2 ? nb2 : nb;
+}
+
+void	ft_lstadd_end(t_list **head, t_list *elem)
+{
+	t_list *current;
+
+	if (!head || !elem)
+		return ;
+	if (!*head)
+		*head = elem;
+	else
+	{
+		current = *head;
+		while (current->next)
+			current = current->next;
+		current->next = elem;
+	}
 }
 
 void	find_all_path(t_graph *graph)
@@ -184,20 +234,24 @@ void	find_all_path(t_graph *graph)
 	int		i;
 	t_list	*list;
 
-	//ft_bzero((void*)graph->tab_path, sizeof(graph->tab_path));
+	find_nb_path(graph);
+	ft_dprintf(2, "nb_path: %d\n", graph->nb_path);
 	i = 0;
 	mallcheck(graph->tab[PATH] = (int*)ft_memalloc(sizeof(int) * graph->nb_sommets));
 	give_weight(graph, graph->start, graph->end);
-	list = select_best_path(graph);
-
-	print_tab((int*)list->content, graph->nb_sommets);
-	//while (i < 2 && dijkstra_algo(graph, graph->start, graph->end))
-//	{
-//		mark_path(graph);
-//		i++;
-//		graph->nb_path++;
-//		if (!check_all_tag(graph))
-//			break ;
-		//print_path(graph->tab_path[graph->nb_path - 1].head_path);
-//	}
+	while (i < graph->nb_path)
+	{
+		list = select_best_path(graph);
+		ft_dprintf(2, "Chemin trouve: ");
+		print_tab((int*)list->content, graph->nb_sommets);
+		ft_lstadd_end(&graph->list_paths, list);
+		mark_path(graph, (int*)list->content);
+		i++;
+	}
+	list = graph->list_paths;
+	while (list)
+	{
+		print_tab((int*)list->content, graph->nb_sommets);
+		list = list->next;
+	}
 }

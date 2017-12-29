@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/28 17:33:19 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/28 18:45:29 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define SEEN 1
 # define PATH 2
 
+# define MAX_SIZE 999999999
 
 # define ENDL ft_dprintf(2, "\n----------\n");
 
