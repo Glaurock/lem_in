@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/28 14:35:48 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 11:40:36 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,11 +119,11 @@ void	game_loop(t_graph *graph)
 		//ft_dprintf(2, "last_dist: %d, actual_dist: %d\n", last_dist + graph->nb_ants, ft_path_size(path) - 1);
 		if (!i)
 			create_ant(graph, map, &node);
-		else if (node->is_free) //&& last_dist + graph->nb_ants > ft_path_size(path) - 1)
+		else if (node->is_free && last_dist + graph->nb_ants > count_path_size(map, graph->nb_sommets, graph->end) - 1)
 				create_ant(graph, map, &node);
 		list = list->next;
 		i++;
-		//last_dist = ft_path_size(path) - 1;
+		last_dist = count_path_size(map, graph->nb_sommets, graph->end) - 1;
 	}
 	//print_graph(graph);
 	//ft_dprintf(2, "nb_ants : %d, arrived : %d\n", graph->nb_ants, graph->arrived);
@@ -147,9 +147,6 @@ int		main(int argc, char **argv)
 	//	game_loop(graph);
 	//print_graph(graph);
 	free(graph->tab_ants);
-	//i = -1;
-	//while (++i < graph->nb_path)
-	//	free_path(graph->tab_path[i].head_path);
 	free(graph->tab_path);
 	del_graph(graph);
 	return (0);

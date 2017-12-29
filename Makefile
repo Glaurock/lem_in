@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2017/12/28 09:22:39 by gmonnier         ###   ########.fr        #
+#    Updated: 2017/12/29 09:39:00 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC = \
 	input.c \
 	dijkstra.c \
 	algo_utils.c \
-	dfs.c
+	dfs.c \
+	divers.c
 
 LIB = ./libft/libft.a \
 
@@ -75,3 +76,6 @@ $(LIB):
 
 test: all
 	./$(NAME) < test2.txt
+
+debug: all
+	valgrind ./$(NAME) < test3.txt

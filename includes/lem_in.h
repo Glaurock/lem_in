@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/28 18:45:29 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 11:50:35 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define PATH 2
 
 # define MAX_SIZE 999999999
+# define TAG 2500
 
 # define ENDL ft_dprintf(2, "\n----------\n");
 
@@ -112,7 +113,7 @@ int			check_false(int *tab, int size);
 int			check_true(int *tab, int size);
 void		print_tab_previous(t_node **tab_previous, int size);
 void		print_weight(int **tab, int size);
-void		print_tab(int *tab, int size);
+void		print_tab(int *tab, int size, int end);
 
 void		reverse_tab(int *tab, int size);
 
@@ -125,5 +126,15 @@ void	find_all_path(t_graph *graph);
 
 void		push_back(t_list **head, t_list *new_elem);
 t_list	*ft_list_at(t_list *begin_list, unsigned int nbr);
+
+/*divers*/
+
+void	find_nb_path(t_graph *graph);
+void	ft_lstadd_end(t_list **head, t_list *elem);
+void		mark_path(t_graph *graph, int *tab);
+void		unmark_path(t_graph *graph, int *tab);
+void	free_tab_in_list(void *content, size_t n);
+void		print_list_tmp(t_list *current, int size, int end);
+int			count_path_size(int *tab, int size, int end);
 
 #endif

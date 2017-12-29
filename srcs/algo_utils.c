@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 14:46:24 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/28 19:20:47 by gmonnier         ###   ########.fr       */
+/*   Updated: 2017/12/29 10:35:20 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			check_true(int *tab, int size)
 	return (1);
 }
 
-void		print_tab(int *tab, int size)
+void		print_tab(int *tab, int size, int end)
 {
 	int		i;
 
@@ -75,6 +75,11 @@ void		print_tab(int *tab, int size)
 	while (++i < size)
 	{
 		ft_dprintf(2, "(%d) || ", tab[i]);
+		if (tab[i] == end)
+		{
+			ft_dprintf(2, "\n");
+			return ;
+		}
 	}
 	ft_dprintf(2, "\n");
 }
