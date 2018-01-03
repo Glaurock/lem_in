@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:27:50 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 17:59:12 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/03 13:50:26 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		create_ant(t_graph *graph, int *map, t_node **tmp)
 	graph->index++;
 	if (graph->space)
 		ft_printf(" ");
-	ft_printf("L%d-%d", graph->index, (*tmp)->number);
+	ft_printf("L%d-%s", graph->index, (*tmp)->name);
 	check_arrived(graph, graph->index - 1);
 	graph->space = 1;
 }
@@ -59,6 +59,7 @@ void	update_ants(t_graph *graph)
 	t_node	*tmp;
 	int		i;
 	t_ant	*ant;
+	t_node	*node_name;
 
 	i = -1;
 	while (++i < graph->index)
@@ -73,7 +74,8 @@ void	update_ants(t_graph *graph)
 		ant->index++;
 		if (graph->space)
 			ft_printf(" ");
-		ft_printf("L%d-%d", i + 1, ant->map[ant->index]);
+		node_name = give_node(graph, ant->map[ant->index]);
+		ft_printf("L%d-%s", i + 1, node_name->name);
 		graph->space = 1;
 		if (!check_arrived(graph, i))
 		{
