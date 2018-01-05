@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/05 09:26:51 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 09:41:08 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct		s_edge
 {
 	struct s_node	*links_to;
 	struct s_edge	*next;
+	int				is_full :2;
 }					t_edge;
 
 typedef struct		s_ant
@@ -49,10 +50,12 @@ typedef struct		s_node
 {
 	int				number;
 	char			*name;
-	int				is_free :2;
-	int				is_a_path: 2;
 	struct s_edge	*edges_l;
 	struct s_node	*next;
+
+	//todel
+	int				is_free :2;
+	int				is_a_path: 2;
 }					t_node;
 
 /*

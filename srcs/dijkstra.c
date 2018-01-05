@@ -6,12 +6,12 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:22:01 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/03 12:39:35 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 09:35:30 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
+/*
 static int		get_index_min_weight(int **tab, int size)
 {
 	int i;
@@ -93,7 +93,7 @@ void			give_weight(t_graph *graph, int start)
 
 		current = give_node(graph, i_father);
 
-		/* poids plus fort pour les nodes de path */
+		// poids plus fort pour les nodes de path
 		if (current->is_a_path)
 			graph->tab[WEIGHT][current->number] += TAG;
 
@@ -120,4 +120,4 @@ void			give_weight(t_graph *graph, int start)
 		if (!unreacheable_check(graph->tab, graph->nb_sommets))
 			return ; // probleme ici 
 	}
-}
+}*/

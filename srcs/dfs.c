@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:22:28 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/03 12:51:19 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 09:36:05 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 	}
 	return (min);
 }
-*/
+
 void		depth_first_search(t_graph *graph, t_node *current, int **tab, int *path_index)
 {
 	t_edge	*edge;
@@ -141,11 +141,11 @@ t_list		*select_best_path(t_graph *graph)
 		return (save_best);
 	}
 }
-
+*/
 /*
 ** on s'arrete quand on a trouver assez de chemin (i) ou quand plus de chemin dispo (!list)
 */
-
+/*
 void	find_all_path(t_graph *graph)
 {
 	//t_node	*path;
@@ -179,4 +179,4 @@ void	find_all_path(t_graph *graph)
 		print_tab((int*)list->content, graph->nb_sommets, graph->end);
 		list = list->next;
 	}
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/03 12:51:55 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 09:34:47 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** on s'arrete quand on a trouver tous les chemins possibles ou 
 ** quand la taille du chemin est superieur au chemin mini + nb_ants ( non implementer )
 */
-
+/*
 void	game_loop(t_graph *graph)
 {
 	int		i;
@@ -51,23 +51,25 @@ void	game_loop(t_graph *graph)
 	//ft_dprintf(2, "nb_ants : %d, arrived : %d\n", graph->nb_ants, graph->arrived);
 	ft_printf("\n");
 }
-
+*/
 int		main(void)
 {
 	t_graph		*graph;
-	int			nb_start;
+	//int			nb_start;
 	//int			i;
 
 	mallcheck(graph = (t_graph*)ft_memalloc(sizeof(t_graph)));
 	get_input(graph);
 	ft_dprintf(2, "start : %d, end: %d\n", graph->start, graph->end);
-	find_all_path(graph);
+	transform_list_in_tab(graph);
+	//aff_graph(graph);
+	//find_all_path(graph);
 	if (!graph->list_paths)
 		free_all(graph, "No path found");
-	mallcheck(graph->tab_ants = (t_ant**)ft_memalloc(sizeof(t_ant*) * (graph->nb_ants + 1)));
-	nb_start = graph->nb_ants;
-	while (graph->arrived != nb_start)
-		game_loop(graph);
+	//mallcheck(graph->tab_ants = (t_ant**)ft_memalloc(sizeof(t_ant*) * (graph->nb_ants + 1)));
+	//nb_start = graph->nb_ants;
+	//while (graph->arrived != nb_start)
+	//	game_loop(graph);
 	//print_graph(graph);
 	free_all(graph, 0);
 	return (0);
