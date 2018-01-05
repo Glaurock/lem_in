@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/01/03 12:38:10 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/01/05 11:24:58 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,10 @@ SRC = \
 	dfs.c \
 	divers.c \
 	free_n_error.c \
-	ants.c 
+	ants.c \
+	transform.c \
+	new_algo_utils.c \
+	find_path.c
 
 LIB = ./libft/libft.a \
 
@@ -79,5 +82,5 @@ $(LIB):
 test: all
 	./$(NAME) < test2.txt
 
-debug: all
-	valgrind ./$(NAME) < test3.txt
+other: all
+	./$(NAME) < lemin-tests/model_3

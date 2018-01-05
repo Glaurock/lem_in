@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 09:37:47 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 18:32:17 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 13:02:07 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int			count_path_size(int *tab, int size, int end)
 	while (++i < size)
 	{
 		if (tab[i] == end)
-			return (i + 1);
+			return (i);
 	}
 	return (i);
 }

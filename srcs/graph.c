@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:18:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/05 09:40:11 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 11:41:42 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_edge				*new_edge(t_node *links_to)
 	mallcheck(edge = (t_edge*)malloc(sizeof(t_edge)));
 
 	edge->next = NULL;
+	edge->is_full = 0;
 	edge->links_to = links_to;
 	return (edge);
 }
@@ -109,11 +110,11 @@ void				print_graph(t_graph *graph)
 	}
 	while (node)
 	{
-		ft_dprintf(2, "Number : (%d), name : (%s), %s , %s ", node->number, node->name, node->is_free ? "free" : "occuped", node->is_a_path ? "path" : "not_path");
+		ft_dprintf(2, "Number : (%d), name : (%s) ", node->number, node->name);
 		edge = node->edges_l;
 		while (edge)
 		{
-			ft_dprintf(2, "--> (%s) ", edge->links_to->name);
+			ft_dprintf(2, "--> (%s) , %s ", edge->links_to->name, edge->is_full ? "full" : "empty");
 			edge = edge->next;
 		}
 		node = node->next;

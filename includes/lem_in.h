@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/05 09:41:08 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 13:03:36 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 # define LEM_IN_H
 
 # include "libft.h"
+# include <limits.h>
+# include "math.h"
 
 # define WEIGHT 0
 # define SEEN 1
 # define PATH 2
+# define PARENT 0
 
 # define MAX_SIZE 999999999
 # define TAG 2500
+# define INF INT_MAX
 
 # define ENDL ft_dprintf(2, "\n----------\n");
 
@@ -77,6 +81,7 @@ typedef struct		s_graph
 	t_list			*list_paths;
 	t_list			*list_tmp;
 	int				*tab[3];
+	int				best;
 
 	t_node			**tab_nodes;
 }					t_graph;
@@ -109,7 +114,6 @@ int			check_false(int *tab, int size);
 int			check_true(int *tab, int size);
 
 void		reverse_tab(int *tab, int size);
-
 
 /*algo recursif*/
 
@@ -144,4 +148,13 @@ void		print_weight(int **tab, int size);
 void		print_tab(int *tab, int size, int end);
 
 void	transform_list_in_tab(t_graph *graph);
+
+/*new_algo_utils*/
+
+int			calc_nb_lap(t_graph *graph);
+int			bfs(t_graph *graph);
+void		find_path(t_graph *graph);
+void		augment_flow(t_graph *graph);
+void		dfs(t_graph *graph, t_node *current, int *path_index);
+
 #endif
