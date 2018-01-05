@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 14:32:21 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 09:19:39 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct		s_graph
 	t_list			*list_paths;
 	t_list			*list_tmp;
 	int				*tab[3];
+
+	t_node			**tab_nodes;
 }					t_graph;
 
 t_node				*create_node(int number, char *name);
@@ -102,9 +104,6 @@ void		free_path(t_node *path);
 int			unreacheable_check(int **tab, int size);
 int			check_false(int *tab, int size);
 int			check_true(int *tab, int size);
-void		print_tab_previous(t_node **tab_previous, int size);
-void		print_weight(int **tab, int size);
-void		print_tab(int *tab, int size, int end);
 
 void		reverse_tab(int *tab, int size);
 
@@ -125,7 +124,6 @@ void	ft_lstadd_end(t_list **head, t_list *elem);
 void		mark_path(t_graph *graph, int *tab);
 void		unmark_path(t_graph *graph, int *tab);
 void	free_tab_in_list(void *content, size_t n);
-void		print_list_tmp(t_list *current, int size, int end);
 int			count_path_size(int *tab, int size, int end);
 
 /*ants*/
@@ -134,4 +132,13 @@ void		create_ant(t_graph *graph, int *map, t_node **tmp);
 void	update_ants(t_graph *graph);
 
 void	free_all(t_graph *graph, char *msg);
+
+/*debug*/
+void	aff_graph(t_graph *graph);
+void		print_list_tmp(t_list *current, int size, int end);
+void		print_tab_previous(t_node **tab_previous, int size);
+void		print_weight(int **tab, int size);
+void		print_tab(int *tab, int size, int end);
+
+void	transform_list_in_tab(t_graph *graph);
 #endif
