@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:22:28 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 13:46:29 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/03 12:51:19 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 void		depth_first_search(t_graph *graph, t_node *current, int **tab, int *path_index)
 {
 	t_edge	*edge;
-	int		min_weight;
+	//int		min_weight;
 	//int		*copy_tab;
 
 	//print_weight(tab, graph->nb_sommets);
@@ -89,7 +89,7 @@ t_list		*select_best_path(t_graph *graph)
 	path_index = 0;
 	//ft_memset(graph->tab[SEEN], false, sizeof(int) * graph->nb_sommets);
 
-	give_weight(graph, graph->start, graph->end);
+	give_weight(graph, graph->start);
 
 	depth_first_search(graph, give_node(graph, graph->start), graph->tab, &path_index);
 	save_best = NULL;
@@ -173,7 +173,7 @@ void	find_all_path(t_graph *graph)
 	}
 	ft_dprintf(2, "i: %d\n", i);
 	list = graph->list_paths;
-	ft_dprintf(2, "Liste des chemins trouves: ");
+	ft_dprintf(2, "Liste des chemins trouves:\n");
 	while (list)
 	{
 		print_tab((int*)list->content, graph->nb_sommets, graph->end);

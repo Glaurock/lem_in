@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:22:01 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 18:15:22 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/03 12:39:35 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void		print_all_paths(t_graph *graph)
 	}
 }
 
-void			give_weight(t_graph *graph, int start, int end)
+void			give_weight(t_graph *graph, int start)
 {
 	int		i;
 	t_node	*current;
 	t_edge	*edge;
 	int		i_son;
 	int		i_father;
-	t_node	*tmp_check;
+	//t_node	*tmp_check;
 
 	ft_dprintf(2, "--------Start weight--------\n\n");
 

@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2017/12/29 14:28:16 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/01/03 12:38:10 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = lem-in
 
 CC = gcc
-FLAGS =
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 SRCDIR = srcs
 OBJDIR = obj

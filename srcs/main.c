@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 18:29:09 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/03 12:51:55 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void	game_loop(t_graph *graph)
 	ft_printf("\n");
 }
 
-int		main(int argc, char **argv)
+int		main(void)
 {
 	t_graph		*graph;
 	int			nb_start;
-	int			i;
+	//int			i;
 
 	mallcheck(graph = (t_graph*)ft_memalloc(sizeof(t_graph)));
 	get_input(graph);
@@ -66,8 +66,8 @@ int		main(int argc, char **argv)
 		free_all(graph, "No path found");
 	mallcheck(graph->tab_ants = (t_ant**)ft_memalloc(sizeof(t_ant*) * (graph->nb_ants + 1)));
 	nb_start = graph->nb_ants;
-	//while (graph->arrived != nb_start)
-	//	game_loop(graph);
+	while (graph->arrived != nb_start)
+		game_loop(graph);
 	//print_graph(graph);
 	free_all(graph, 0);
 	return (0);

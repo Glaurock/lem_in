@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/05 09:19:39 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 09:26:51 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_node				*give_node(t_graph *graph, int number);
 void				get_input(t_graph *graph);
 
 /* algo */
-void			give_weight(t_graph *graph, int start, int end);
+void			give_weight(t_graph *graph, int start);
 int					dijkstra_algo(t_graph *graph, int start, int end);
 void				push_path(t_node **head, t_node *path);
 void				select_path(t_graph *graph);
