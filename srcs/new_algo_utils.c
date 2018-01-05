@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 10:16:05 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/05 13:50:16 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 14:18:21 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int		bfs(t_graph *graph)
 	//if (graph->tab_nodes[1])
 	//ft_dprintf(2, "tab: %d\n", graph->tab_nodes[1]->number);
 	ft_lstadd(&stack, ft_lstnew(graph->tab_nodes[graph->start], sizeof(t_node)));
-	ft_dprintf(2, "\nstack: %d\n", ((t_node*)stack->content)->number);
+	//ft_dprintf(2, "\nstack: %d\n", ((t_node*)stack->content)->number);
 
 	graph->tab[SEEN][graph->start] = true;
 	graph->tab[PARENT][graph->start] = -1;
