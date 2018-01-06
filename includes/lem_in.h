@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 11:36:47 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 13:18:24 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,7 @@
 # define PATH 2
 # define PARENT 0
 
-# define MAX_SIZE 999999999
-# define TAG 2500
 # define INF 10000
-
-# define ENDL ft_dprintf(2, "\n----------\n");
 
 /*
 ** la liste des liens
@@ -166,5 +162,7 @@ t_edge	*give_edge(t_graph *graph, int son, int parent);
 void	construct_residual_graph(t_graph *graph);
 void	adjust_negative_cycle(t_graph *graph);
 void	reset_ways(t_graph *graph);
+void	sort_by_size(t_graph *graph);
+void	save_best_paths(t_graph *graph);
 
 #endif

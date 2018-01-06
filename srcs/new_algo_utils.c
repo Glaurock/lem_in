@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 10:16:05 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 11:41:05 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 13:31:47 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int			calc_nb_lap(t_graph *graph)
 {
-	int ret;
-	int total_path_dist;
-	int nb_path;
-	t_list *list;
+	int		ret;
+	int		total_path_dist;
+	int		nb_path;
+	t_list	*list;
 
 	ret = 0;
 	total_path_dist = 0;
@@ -25,12 +25,14 @@ int			calc_nb_lap(t_graph *graph)
 	list = graph->list_tmp;
 	while (list)
 	{
-		total_path_dist +=  count_path_size((int*)list->content, graph->nb_sommets, graph->end);
+		total_path_dist +=  count_path_size((int*)list->content,
+		graph->nb_sommets, graph->end);
 		list = list->next;
 		nb_path++;
 	}
 	//ft_dprintf(2, "total path dist: %d\n", total_path_dist);
-	ret = (int)ceil((double)(graph->nb_ants - nb_path + total_path_dist) / (double)nb_path);
+	ret = (int)ceil((double)(graph->nb_ants - nb_path + total_path_dist)
+	/ (double)nb_path);
 	return (ret);
 }
 

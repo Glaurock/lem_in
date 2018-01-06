@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 11:47:22 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 13:30:59 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 void	game_loop(t_graph *graph)
 {
 	int		i;
-	//t_node	*path;
 	int		*map;
 	t_list	*list;
 	t_node	*node;

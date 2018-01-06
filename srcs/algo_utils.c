@@ -6,78 +6,96 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 14:46:24 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/05 22:23:58 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 13:16:54 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void		print_weight(int **tab, int size)
+void	save_best_paths(t_graph *graph)
 {
-	int i;
+	t_list *list;
 
-	ft_dprintf(2, "\nprint_tab :\n");
-	i = -1;
-	while (++i < size)
+	ft_lstdel(&graph->list_paths, &free_tab_in_list);
+	list = graph->list_tmp;
+	while (list)
 	{
-		ft_dprintf(2, "weight[%d]: %-3d || path: %d\n", i, tab[WEIGHT][i], tab[PATH][i]);
+		ft_lstadd_end(&graph->list_paths, ft_lstnew(list->content, list->content_size));
+		list = list->next;
 	}
 }
 
-int			unreacheable_check(int **tab, int size)
+void	sort_by_size(t_graph *graph)
 {
+	t_list *list;
 	int i;
-	int check;
-
-	i = -1;
-	check = 0;
-	while (++i < size)
-	{
-		if (tab[SEEN][i] == false && tab[WEIGHT][i] != -1)
-			check = 1;
-	}
-	return (check);
-}
-
-int			check_false(int *tab, int size)
-{
-	int i;
-
-	i = -1;
-	while (++i < size)
-	{
-		if (tab[i] == false)
-			return (1);
-	}
-	return (0);
-}
-
-int			check_true(int *tab, int size)
-{
-	int i;
+	int size;
+	int size1;
+	int size2;
 
 	i = 0;
-	while (++i < size)
+	size = ft_lst_size(graph->list_paths);
+	list = graph->list_paths;
+	while (i < size)
 	{
-		if (tab[i] == true)
-			return (0);
+		list = graph->list_paths;
+		while (list->next)
+		{
+			size1 = count_path_size((int*)list->content, graph->nb_sommets, graph->end);
+			size2 = count_path_size((int*)list->next->content, graph->nb_sommets, graph->end);
+			if (size1 > size2)
+				ft_swap_ptr(&(list->content), &(list->next->content));
+			list = list->next;
+		}
+		i++;
 	}
-	return (1);
 }
 
-void		print_tab(int *tab, int size, int end)
+void		mark_path(t_graph *graph, int *tab)
 {
 	int		i;
+	t_node	*node;
+
+	i = -1;
+	while (++i < graph->nb_sommets)
+	{
+		if (tab[i] == graph->end)
+			return ;
+		if (tab[i] != graph->start)
+		{
+			node = give_node(graph, tab[i]);
+			node->is_a_path = 1;
+		}
+	}
+}
+
+void		unmark_path(t_graph *graph, int *tab)
+{
+	int		i;
+	t_node	*node;
+
+	i = -1;
+	while (++i < graph->nb_sommets)
+	{
+		if (tab[i] == graph->end)
+			return ;
+		if (tab[i] != graph->start)
+		{
+			node = give_node(graph, tab[i]);
+			node->is_a_path = 0;
+		}
+	}
+}
+
+int			count_path_size(int *tab, int size, int end)
+{
+	int i;
 
 	i = -1;
 	while (++i < size)
 	{
-		ft_dprintf(2, "(%d) || ", tab[i]);
 		if (tab[i] == end)
-		{
-			ft_dprintf(2, "\n");
-			return ;
-		}
+			return (i);
 	}
-	ft_dprintf(2, "\n");
+	return (i);
 }

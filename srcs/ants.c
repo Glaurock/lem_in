@@ -6,12 +6,11 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:27:50 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/03 13:50:26 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 13:16:00 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
 
 int		check_arrived(t_graph *graph, int i)
 {
@@ -28,17 +27,11 @@ int		check_arrived(t_graph *graph, int i)
 	return (0);
 }
 
-/*
-** on cree une fourmi, on la push a la fin de la liste, 
-** on met la position a not_free
-*/
-
 void		create_ant(t_graph *graph, int *map, t_node **tmp)
 {
 	t_ant *ant;
 
 	mallcheck(ant = (t_ant*)ft_memalloc(sizeof(t_ant)));
-	//check malloc
 
 	graph->tab_ants[graph->index] = ant;
 	ant->map = map;
@@ -53,7 +46,6 @@ void		create_ant(t_graph *graph, int *map, t_node **tmp)
 	graph->space = 1;
 }
 
-
 void	update_ants(t_graph *graph)
 {
 	t_node	*tmp;
@@ -64,7 +56,6 @@ void	update_ants(t_graph *graph)
 	i = -1;
 	while (++i < graph->index)
 	{
-		//print_path(ant->path);
 		ant = graph->tab_ants[i];
 		if (!ant)
 			continue ;
