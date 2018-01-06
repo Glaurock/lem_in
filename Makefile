@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/01/06 14:05:31 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/01/06 15:33:41 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,8 @@ INCDIR = includes \
 SRC = \
 	main.c \
 	graph.c \
+	graph2.c \
+	edge.c \
 	input.c \
 	algo_utils.c \
 	dfs.c \

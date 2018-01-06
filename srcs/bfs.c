@@ -19,14 +19,14 @@ static void	edge_loop(t_graph *graph, t_list *poped, int *check, t_list **stack)
 	edge = ((t_node*)poped->content)->edges_l;
 	while (edge && check)
 	{
-		if (graph->tab[SEEN][edge->links_to->number] == false && !edge->is_full)
+		if (graph->tab[SEEN][edge->links_to->number] == FALSE && !edge->is_full)
 		{
 			ft_lstadd_end(stack,
 			ft_lstnew(graph->tab_nodes[edge->links_to->number],
 			sizeof(t_node)));
 			graph->tab[PARENT][edge->links_to->number] =
 			((t_node*)poped->content)->number;
-			graph->tab[SEEN][edge->links_to->number] = true;
+			graph->tab[SEEN][edge->links_to->number] = TRUE;
 			if (edge->links_to->number == graph->end)
 				*check = 0;
 		}
@@ -45,7 +45,7 @@ int			bfs(t_graph *graph)
 	ft_bzero(graph->tab[SEEN], sizeof(int) * graph->nb_sommets);
 	ft_lstadd(&stack, ft_lstnew(graph->tab_nodes[graph->start],
 	sizeof(t_node)));
-	graph->tab[SEEN][graph->start] = true;
+	graph->tab[SEEN][graph->start] = TRUE;
 	graph->tab[PARENT][graph->start] = -1;
 	check = 1;
 	while (stack && check)
@@ -56,5 +56,5 @@ int			bfs(t_graph *graph)
 		free(poped);
 	}
 	ft_lstdel(&stack, &free_tab_in_list);
-	return (check == 1 ? false : true);
+	return (check == 1 ? FALSE : TRUE);
 }

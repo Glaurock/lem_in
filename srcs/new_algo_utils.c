@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 10:16:05 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 15:05:02 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 15:26:26 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void		augment_flow(t_graph *graph)
 	{
 		edge = give_edge(graph, current, graph->tab[PARENT][current]);
 		reverse_edge = give_edge(graph, graph->tab[PARENT][current], current);
-		//ft_dprintf(2, "current edge: %d\n", edge->links_to->number);
 		if (reverse_edge->is_full)
 			reverse_edge->is_full = 0;
 		else
@@ -55,7 +54,7 @@ void		augment_flow(t_graph *graph)
 	}
 }
 
-void	reset_ways(t_graph *graph)
+void		reset_ways(t_graph *graph)
 {
 	t_node *node;
 	t_edge *edge;

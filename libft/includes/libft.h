@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 10:41:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 11:34:16 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 15:42:15 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,15 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 
+# define TRUE 1
+# define FALSE 0
+
 typedef struct		s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
-
-typedef enum
-{
-	false,
-	true
-}					e_bool;
 
 void				ft_swap_ptr(void **ptr1, void **ptr2);
 void				ft_reverse_tab(int *tab, int size);

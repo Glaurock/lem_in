@@ -6,70 +6,11 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:19:31 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 13:30:30 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 16:05:34 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-static int	already_an_edge(t_node *node1, t_node *node2)
-{
-	t_edge *edge;
-
-	edge = node1->edges_l;
-	while (edge)
-	{
-		if (edge->links_to == node2)
-			return (1);
-		edge = edge->next;
-	}
-	return (0);
-}
-
-static int	get_edge(t_graph *graph, char *line)
-{
-	t_node	*node1;
-	t_node	*node2;
-	int		i;
-	char	**splitted;
-
-	if (!*line)
-		return (-1);
-	splitted = ft_strsplit(line, '-');
-	node1 = give_node_name(graph, splitted[0]);
-	node2 = give_node_name(graph, splitted[1]);
-	i = -1;
-	while (splitted[++i])
-		free(splitted[i]);
-	free(splitted);
-	if (!node1 || !node2)
-		return (-1);
-	if (!already_an_edge(node1, node2))
-		add_edge(node1, node2);
-	return (1);
-}
-
-static void	read_edge(t_graph *graph, char *line)
-{
-	if (ft_strchr(line, '-') == 0)
-		return ;
-	if (line[0] != '#' && get_edge(graph, line) == -1)
-		return ;
-	ft_memdel((void**)&line);
-	while (get_next_line(0, &line) > 0)
-	{
-		if (line[0] != '#')
-		{
-			if (get_edge(graph, line) == -1)
-			{
-				ft_memdel((void**)&line);
-				return ;
-			}
-			ft_printf("%s\n", line);
-		}
-		ft_memdel((void**)&line);
-	}
-}
 
 int			special_char(t_graph *graph, char **line, int *check)
 {
@@ -80,6 +21,8 @@ int			special_char(t_graph *graph, char **line, int *check)
 		a = 1;
 	else if (ft_strcmp(*line, "##end") == 0)
 		a = 2;
+	else if (ft_strncmp(*line, "##", 2) == 0)
+		return (-1);
 	ft_memdel((void**)line);
 	if (a)
 	{
@@ -92,7 +35,7 @@ int			special_char(t_graph *graph, char **line, int *check)
 		(*check)++;
 		return (1);
 	}
-	return (0);
+	return (2);
 }
 
 static void	init(t_graph *graph)
@@ -126,11 +69,23 @@ static void	fatal_errors(t_graph *graph, char *line, int check)
 		free_all(graph, "Error input start and/or end");
 }
 
+static void	new_node(t_graph *graph, char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] != ' ')
+		i++;
+	line[i] = '\0';
+	push_end(graph, create_node(graph->nb_sommets, line));
+	ft_memdel((void**)&line);
+}
+
 void		get_input(t_graph *graph)
 {
 	char	*line;
-	int		i;
 	int		check;
+	int		ret;
 
 	check = 0;
 	init(graph);
@@ -139,14 +94,13 @@ void		get_input(t_graph *graph)
 		ft_printf("%s\n", line);
 		if (ft_strchr(line, '-'))
 			break ;
-		if (line[0] == '#' && !special_char(graph, &line, &check))
+		if (line[0] == '#')
+			ret = special_char(graph, &line, &check);
+		if (ret == 2)
 			continue ;
-		i = 0;
-		while (line[i] && line[i] != ' ')
-			i++;
-		line[i] = '\0';
-		push_end(graph, create_node(graph->nb_sommets, line));
-		ft_memdel((void**)&line);
+		else if (ret == -1)
+			break ;
+		new_node(graph, line);
 		graph->nb_sommets++;
 	}
 	fatal_errors(graph, line, check);

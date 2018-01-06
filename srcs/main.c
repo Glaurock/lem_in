@@ -6,16 +6,11 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 15:06:09 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 15:32:36 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-/*
-** on s'arrete quand on a trouver tous les chemins possibles ou 
-** quand la taille du chemin est superieur au chemin mini + nb_ants ( non implementer )
-*/
 
 void	game_loop(t_graph *graph)
 {
@@ -23,31 +18,24 @@ void	game_loop(t_graph *graph)
 	int		*map;
 	t_list	*list;
 	t_node	*node;
-	int		ret;
 
 	graph->space = 0;
 	ft_dprintf(2, "------Start game loop-----\n\n");
-	//fonction update game : pour chaque fourmi, la mettre a la position suivante
 	update_ants(graph);
-	//ft_dprintf(2, "nb active ants: %d\n", size_ants(graph->list_ants));
 	i = 0;
 	list = graph->list_paths;
 	while (graph->nb_ants && list)
 	{
 		map = (int*)(list->content);
 		node = give_node(graph, map[1]);
-		//ft_dprintf(2, " nb_ants: %d, count_path_size: %d\n", graph->nb_ants, count_path_size(map, graph->nb_sommets, graph->end));
-		ret = calc_nb_lap(graph, 1);
-		ft_dprintf(2, "nb_lap: %d\n", ret);
 		if (!i)
 			create_ant(graph, map, &node);
-		else if (node->is_free && calc_nb_lap(graph, 1) >= count_path_size(map, graph->nb_sommets, graph->end))
-				create_ant(graph, map, &node);
+		else if (node->is_free && calc_nb_lap(graph, 1) >=
+		count_path_size(map, graph->nb_sommets, graph->end))
+			create_ant(graph, map, &node);
 		list = list->next;
 		i++;
 	}
-	//print_graph(graph);
-	//ft_dprintf(2, "nb_ants : %d, arrived : %d\n", graph->nb_ants, graph->arrived);
 	ft_printf("\n");
 }
 
@@ -63,11 +51,11 @@ int		main(void)
 	find_path(graph);
 	if (!graph->list_paths)
 		free_all(graph, "No path found");
-	mallcheck(graph->tab_ants = (t_ant**)ft_memalloc(sizeof(t_ant*) * (graph->nb_ants + 1)));
+	mallcheck(graph->tab_ants = (t_ant**)ft_memalloc(sizeof(t_ant*)
+	* (graph->nb_ants + 1)));
 	nb_start = graph->nb_ants;
 	while (graph->arrived != nb_start)
 		game_loop(graph);
-	//print_graph(graph);
 	free_all(graph, 0);
 	return (0);
 }

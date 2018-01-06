@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 09:37:47 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 15:15:14 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 15:34:58 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,33 @@ void		print_tab(int *tab, int size, int end)
 		}
 	}
 	ft_dprintf(2, "\n");
+}
+
+void		print_graph(t_graph *graph)
+{
+	t_node	*node;
+	t_edge	*edge;
+
+	if (!graph)
+		return ;
+	node = graph->head;
+	if (!node)
+	{
+		ft_dprintf(2, "Pas de premier sommet dans le graphe\n");
+		return ;
+	}
+	while (node)
+	{
+		ft_dprintf(2, "Number : (%d), name : (%s) ", node->number, node->name);
+		edge = node->edges_l;
+		while (edge)
+		{
+			ft_dprintf(2, "LINKS TO (%s) , %s , %d, %s	",
+			edge->links_to->name, edge->is_full ? "full" : "empty",
+			edge->w, edge->wrong_way ? "wrong_way" : "OK");
+			edge = edge->next;
+		}
+		node = node->next;
+		ft_dprintf(2, "\n");
+	}
 }

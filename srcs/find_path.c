@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 11:24:30 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 15:18:54 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 15:26:57 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void		cancelling_negative_path(t_graph *graph)
 {
 	int		path_index;
-	t_list	*list;
 
 	path_index = 0;
 	ft_dprintf(2, "\n--------cancelling algo --------\n");
