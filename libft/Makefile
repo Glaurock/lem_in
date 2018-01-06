@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2017/12/26 23:07:53 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/01/06 11:35:08 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC += \
 	math/ft_recursive_power.c \
 	math/ft_atoi.c \
 	math/ft_itoa.c \
+	math/ft_reverse_tab.c \
 	math/ft_itoa_base.c
 
 SRC += \
@@ -69,6 +70,8 @@ SRC += \
 	list/ft_lst_size.c \
 	list/ft_lst_reverse.c \
 	list/ft_lstadd.c \
+	list/ft_lstadd_end.c \
+	list/ft_lst_at.c \
 	list/ft_lstdel.c \
 	list/ft_lstdelone.c \
 	list/ft_lstiter.c \

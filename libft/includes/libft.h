@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 10:41:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/26 23:08:25 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 11:34:16 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef enum
 }					e_bool;
 
 void				ft_swap_ptr(void **ptr1, void **ptr2);
+void				ft_reverse_tab(int *tab, int size);
 void				die(char *msg);
 void				mallcheck(void *param);
 int					ft_isalpha(int c);
@@ -66,6 +67,8 @@ void				*ft_memset(void *s, int c, size_t n);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 void				ft_lstadd(t_list **alst, t_list *new);
+void				ft_lstadd_end(t_list **head, t_list *elem);
+t_list				*ft_lst_at(t_list *begin_list, unsigned int nbr);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));

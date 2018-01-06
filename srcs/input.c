@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:19:31 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/03 14:09:57 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 11:23:15 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static int	get_edge(t_graph *graph, char *line)
 	int		i;
 	char	**splitted;
 
+	if (!*line)
+		return (-1);
 	splitted = ft_strsplit(line, '-');
 	node1 = give_node_name(graph, splitted[0]);
 	node2 = give_node_name(graph, splitted[1]);

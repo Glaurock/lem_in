@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mallcheck.c                                        :+:      :+:    :+:   */
+/*   ft_lst_at.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/26 23:03:59 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 11:35:39 by gmonnier         ###   ########.fr       */
+/*   Created: 2018/01/06 11:29:42 by gmonnier          #+#    #+#             */
+/*   Updated: 2018/01/06 11:30:23 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		mallcheck(void *param)
+t_list	*ft_lst_at(t_list *begin_list, unsigned int nbr)
 {
-	if (param == NULL)
+	unsigned int i;
+
+	i = 0;
+	if (!begin_list)
+		return (0);
+	while (begin_list && i < nbr)
 	{
-		ft_putendl_fd("Fail to malloc memory", 2);
-		exit(EXIT_FAILURE);
+		begin_list = begin_list->next;
+		i++;
 	}
+	if (i > nbr)
+		return (0);
+	return (begin_list);
 }

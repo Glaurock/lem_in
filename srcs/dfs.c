@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:22:28 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 10:04:56 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 11:44:08 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,45 +54,3 @@ void		dfs(t_graph *graph, t_node *current, int *path_index)
 //		ft_dprintf(2, "finish\n");
 //	}
 }
-
-/*void	construct_residual_graph(t_graph *graph)
-{
-	t_node *node;
-	t_edge *edge;
-	t_edge *reverse_edge;
-
-	node = graph->head;
-	while (node)
-	{
-		edge = node->edges_l;
-		while (edge)
-		{
-			if (edge->is_full)
-			{
-				reverse_edge = give_edge(graph, node->number, edge->links_to->number);
-				edge->wrong_way = 1;
-				reverse_edge->w = -1;
-			}
-			edge = edge->next;
-		}
-		node = node->next;
-	}
-	node = graph->head;
-	while (node)
-	{
-		edge = node->edges_l;
-		while (edge)
-		{
-			reverse_edge = give_edge(graph, node->number, edge->links_to->number);
-			if (!edge->w && !reverse_edge->w)
-			{
-				edge->w = 1;
-				reverse_edge->w = 1;
-			}
-			edge = edge->next;
-		}
-		node = node->next;
-	}
-	print_graph(graph);
-}*/
-

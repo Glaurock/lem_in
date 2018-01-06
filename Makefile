@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/01/06 10:12:36 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/01/06 11:43:25 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,7 @@ INCDIR = includes \
 SRC = \
 	main.c \
 	graph.c \
-	node_utils.c \
 	input.c \
-	dijkstra.c \
 	algo_utils.c \
 	dfs.c \
 	divers.c \
@@ -36,7 +34,9 @@ SRC = \
 	transform.c \
 	new_algo_utils.c \
 	find_path.c \
-	handle_neg_cycle.c
+	handle_neg_cycle.c \
+	residual_graph.c \
+	bfs.c
 
 LIB = ./libft/libft.a \
 		-lm

@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:18:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 09:59:52 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 11:39:15 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,22 @@ t_node				*give_node(t_graph *graph, int number)
 		if (node->number == number)
 			return (node);
 		node = node->next;
+	}
+	return (NULL);
+}
+
+t_edge		*give_edge(t_graph *graph, int son, int parent)
+{
+	t_edge *edge;
+	t_node *node;
+
+	node = graph->tab_nodes[parent];
+	edge = node->edges_l;
+	while (edge)
+	{
+		if (edge->links_to->number == son)
+			return (edge);
+		edge = edge->next;
 	}
 	return (NULL);
 }

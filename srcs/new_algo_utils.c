@@ -6,27 +6,11 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 10:16:05 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 10:53:35 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 11:41:05 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-t_edge		*give_edge(t_graph *graph, int son, int parent)
-{
-	t_edge *edge;
-	t_node *node;
-
-	node = graph->tab_nodes[parent];
-	edge = node->edges_l;
-	while (edge)
-	{
-		if (edge->links_to->number == son)
-			return (edge);
-		edge = edge->next;
-	}
-	return (NULL);
-}
 
 int			calc_nb_lap(t_graph *graph)
 {
@@ -70,57 +54,6 @@ void		augment_flow(t_graph *graph)
 	}
 }
 
-static t_list	*pop(t_list **list)
-{
-	t_list *tmp;
-
-	if (!list || !*list)
-		return (NULL);
-	tmp = *list;
-	*list = (*list)->next;
-	return (tmp);
-}
-
-int		bfs(t_graph *graph)
-{
-	t_list *stack;
-	t_list *poped;
-	t_edge *edge;
-
-	stack = NULL;
-	ft_bzero(graph->tab[PARENT], sizeof(int) * graph->nb_sommets);
-	ft_bzero(graph->tab[SEEN], sizeof(int) * graph->nb_sommets);
-	//if (graph->tab_nodes[1])
-	//ft_dprintf(2, "tab: %d\n", graph->tab_nodes[1]->number);
-	ft_lstadd(&stack, ft_lstnew(graph->tab_nodes[graph->start], sizeof(t_node)));
-	//ft_dprintf(2, "\nstack: %d\n", ((t_node*)stack->content)->number);
-
-	graph->tab[SEEN][graph->start] = true;
-	graph->tab[PARENT][graph->start] = -1;
-
-	while (stack)
-	{
-		poped = pop(&stack);
-		edge = ((t_node*)poped->content)->edges_l;
-
-		while (edge)
-		{
-			//ft_dprintf(2, "edge from: (%d) to (%d) is %s \n", ((t_node*)poped->content)->number, edge->links_to->number, edge->is_full ? "full" : "empty");
-			if (graph->tab[SEEN][edge->links_to->number] == false && !edge->is_full)
-			{
-				ft_lstadd_end(&stack, ft_lstnew(graph->tab_nodes[edge->links_to->number], sizeof(t_node)));
-				graph->tab[PARENT][edge->links_to->number] = ((t_node*)poped->content)->number;
-				graph->tab[SEEN][edge->links_to->number] = true;
-				//free(poped);
-				if (edge->links_to->number == graph->end)
-					return (true); // free la liste en mettant une condition pour sortir des deux whiles
-			}
-			edge = edge->next;
-		}
-	}
-	return (false);
-}
-
 void	reset_ways(t_graph *graph)
 {
 	t_node *node;
@@ -136,54 +69,5 @@ void	reset_ways(t_graph *graph)
 			edge = edge->next;
 		}
 		node = node->next;
-	}
-}
-
-//void	list_edges_in_tmp(t_graph *graph)
-void	construct_residual_graph(t_graph *graph)
-{
-	t_list *stack;
-	t_list *poped;
-	t_edge *edge;
-	t_edge *reverse_edge;
-
-	stack = NULL;
-	//ft_lstdel(&graph->list_tmp, &free_tab_in_list);
-	ft_lstadd(&stack, ft_lstnew(graph->tab_nodes[graph->start], sizeof(t_node)));
-
-	ft_bzero(graph->tab[SEEN], sizeof(int) * graph->nb_sommets);
-	graph->tab[SEEN][graph->start] = true;
-	
-	while (stack)
-	{
-		poped = pop(&stack);
-		edge = ((t_node*)poped->content)->edges_l;
-		//ft_lstadd_end(&graph->list_tmp, ft_lstnew(poped->content, poped->content_size));
-		while (edge)
-		{
-			//ft_dprintf(2, "edge from: (%d) to (%d) is %s \n", ((t_node*)poped->content)->number, edge->links_to->number, edge->is_full ? "full" : "empty");
-			reverse_edge = give_edge(graph, ((t_node*)poped->content)->number, edge->links_to->number);
-			if (graph->tab[SEEN][edge->links_to->number] == false && edge->links_to->number != graph->end)
-			{
-				ft_lstadd_end(&stack, ft_lstnew(graph->tab_nodes[edge->links_to->number], sizeof(t_node)));
-				graph->tab[SEEN][edge->links_to->number] = true;
-			}
-			// donner un poids a l'edge, puis marquer l'edge inverse comme wrong way
-			if (!edge->wrong_way && !reverse_edge->wrong_way) // une seule fois par coter normanelement
-			{
-				if (edge->is_full)
-				{
-					edge->wrong_way = 1;
-					reverse_edge->w = -1;
-				}
-				else
-				{
-					edge->w = 1;
-					reverse_edge = give_edge(graph, ((t_node*)poped->content)->number, edge->links_to->number);
-					reverse_edge->wrong_way = 1;
-				}
-			}
-			edge = edge->next;
-		}
 	}
 }
