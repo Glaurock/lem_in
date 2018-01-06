@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:27:50 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 13:16:00 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 14:32:37 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		create_ant(t_graph *graph, int *map, t_node **tmp)
 	t_ant *ant;
 
 	mallcheck(ant = (t_ant*)ft_memalloc(sizeof(t_ant)));
-
+	ft_dprintf(2, "\nCreate ant\n");
 	graph->tab_ants[graph->index] = ant;
 	ant->map = map;
 	ant->index = 1;

@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 13:18:24 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 15:05:28 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	transform_list_in_tab(t_graph *graph);
 
 /*new_algo_utils*/
 
-int			calc_nb_lap(t_graph *graph);
+int			calc_nb_lap(t_graph *graph, int code);
 int			bfs(t_graph *graph);
 void		find_path(t_graph *graph);
 void		augment_flow(t_graph *graph);

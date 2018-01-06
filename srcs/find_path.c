@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 11:24:30 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 13:24:01 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 15:07:19 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	find_path(t_graph *graph)
 		path_index = 0;
 		dfs(graph, graph->tab_nodes[graph->start], &path_index);
 		//ft_dprintf(2, "Nb tour: %d\n", calc_nb_lap(graph));
-		test = calc_nb_lap(graph);
+		test = calc_nb_lap(graph, 0);
 		ft_dprintf(2, "test: %d\n", test);
 		max_flow_is_best = 0;
 		if (test < graph->best)
@@ -80,7 +80,6 @@ void	find_path(t_graph *graph)
 		//ft_dprintf(2, "\n");
 	}
 
-	sort_by_size(graph);
 
 	//verif 
 	t_list *list = graph->list_paths;
@@ -91,4 +90,5 @@ void	find_path(t_graph *graph)
 	}
 	if (max_flow_is_best)
 		cancelling_negative_path(graph);
+	sort_by_size(graph);
 }
