@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 09:37:47 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 13:15:46 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 15:15:14 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void		print_list_tmp(t_list *current, int size, int end)
 {
-
 	ft_dprintf(2, "print_list_tmp: \n");
 	while (current)
 	{

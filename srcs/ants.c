@@ -6,13 +6,13 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:27:50 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 14:32:37 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 15:11:15 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		check_arrived(t_graph *graph, int i)
+int			check_arrived(t_graph *graph, int i)
 {
 	t_ant *ant;
 
@@ -46,7 +46,7 @@ void		create_ant(t_graph *graph, int *map, t_node **tmp)
 	graph->space = 1;
 }
 
-void	update_ants(t_graph *graph)
+void		update_ants(t_graph *graph)
 {
 	t_node	*tmp;
 	int		i;
@@ -60,7 +60,6 @@ void	update_ants(t_graph *graph)
 		if (!ant)
 			continue ;
 		tmp = give_node(graph, ant->map[ant->index]);
-		//ft_dprintf(2, "tmp :%d\n", tmp->number);
 		tmp->is_free = 1;
 		ant->index++;
 		if (graph->space)
