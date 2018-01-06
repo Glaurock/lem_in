@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/05 13:27:10 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 22:34:37 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 ** on s'arrete quand on a trouver tous les chemins possibles ou 
 ** quand la taille du chemin est superieur au chemin mini + nb_ants ( non implementer )
 */
+
+
+
+// SEGFAUTL SI EMPTY LINE
 
 void	game_loop(t_graph *graph)
 {

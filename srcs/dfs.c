@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/28 09:22:28 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/05 12:02:28 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 10:04:56 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		dfs(t_graph *graph, t_node *current, int *path_index)
 {
 	t_edge	*edge;
 
-	graph->tab[SEEN][current->number] = true;
+	//graph->tab[SEEN][current->number] = true;
 	graph->tab[PATH][*path_index] = current->number;
 	(*path_index)++;
 	if (current->number == graph->end)
@@ -46,7 +46,7 @@ void		dfs(t_graph *graph, t_node *current, int *path_index)
 		}
 	}
 	(*path_index)--;
-	graph->tab[SEEN][current->number] = false;
+	//graph->tab[SEEN][current->number] = false;
 	//push_path_on_list_path(&graph->list_paths, path);
 	//print_weight(tab, graph->nb_sommets);
 	//if (check_true(tab[SEEN], graph->nb_sommets))
@@ -54,3 +54,45 @@ void		dfs(t_graph *graph, t_node *current, int *path_index)
 //		ft_dprintf(2, "finish\n");
 //	}
 }
+
+/*void	construct_residual_graph(t_graph *graph)
+{
+	t_node *node;
+	t_edge *edge;
+	t_edge *reverse_edge;
+
+	node = graph->head;
+	while (node)
+	{
+		edge = node->edges_l;
+		while (edge)
+		{
+			if (edge->is_full)
+			{
+				reverse_edge = give_edge(graph, node->number, edge->links_to->number);
+				edge->wrong_way = 1;
+				reverse_edge->w = -1;
+			}
+			edge = edge->next;
+		}
+		node = node->next;
+	}
+	node = graph->head;
+	while (node)
+	{
+		edge = node->edges_l;
+		while (edge)
+		{
+			reverse_edge = give_edge(graph, node->number, edge->links_to->number);
+			if (!edge->w && !reverse_edge->w)
+			{
+				edge->w = 1;
+				reverse_edge->w = 1;
+			}
+			edge = edge->next;
+		}
+		node = node->next;
+	}
+	print_graph(graph);
+}*/
+

@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/01/05 11:24:58 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/01/06 10:12:36 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,11 @@ SRC = \
 	ants.c \
 	transform.c \
 	new_algo_utils.c \
-	find_path.c
+	find_path.c \
+	handle_neg_cycle.c
 
 LIB = ./libft/libft.a \
+		-lm
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJS = $(addprefix $(OBJDIR)/, $(addsuffix .o, $(basename $(SRC))))

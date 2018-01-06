@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 14:46:24 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/12/29 13:33:34 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/05 22:23:58 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		print_weight(int **tab, int size)
 	i = -1;
 	while (++i < size)
 	{
-		ft_dprintf(2, "weight[%d]: %-3d || %s\n", i, tab[WEIGHT][i], tab[SEEN][i] == true ? "true" : "false" );
+		ft_dprintf(2, "weight[%d]: %-3d || path: %d\n", i, tab[WEIGHT][i], tab[PATH][i]);
 	}
 }
 

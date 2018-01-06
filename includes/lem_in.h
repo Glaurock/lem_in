@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/05 13:03:36 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 10:53:41 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define MAX_SIZE 999999999
 # define TAG 2500
-# define INF INT_MAX
+# define INF 10000
 
 # define ENDL ft_dprintf(2, "\n----------\n");
 
@@ -37,6 +37,8 @@ typedef struct		s_edge
 	struct s_node	*links_to;
 	struct s_edge	*next;
 	int				is_full :2;
+	int				w;
+	int				wrong_way: 2;
 }					t_edge;
 
 typedef struct		s_ant
@@ -156,5 +158,13 @@ int			bfs(t_graph *graph);
 void		find_path(t_graph *graph);
 void		augment_flow(t_graph *graph);
 void		dfs(t_graph *graph, t_node *current, int *path_index);
+
+int		find_negative_path(t_graph *graph);
+void	list_edges_in_tmp(t_graph *graph);
+void	give_weight_to_edges(t_graph *graph);
+t_edge	*give_edge(t_graph *graph, int son, int parent);
+void	construct_residual_graph(t_graph *graph);
+void	adjust_negative_cycle(t_graph *graph);
+void	reset_ways(t_graph *graph);
 
 #endif

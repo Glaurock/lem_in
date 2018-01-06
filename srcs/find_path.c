@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 11:24:30 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/05 13:37:32 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/06 10:53:55 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,29 @@ void	find_path(t_graph *graph)
 		print_tab((int*)list->content, graph->nb_sommets, graph->end);
 		list = list->next;
 	}
+
+	//give_weight_to_edges(graph);
+	construct_residual_graph(graph);
+	while (find_negative_path(graph))
+	{
+		adjust_negative_cycle(graph);
+		reset_ways(graph);
+		construct_residual_graph(graph);
+	}
+
+	ft_lstdel(&graph->list_paths, &free_tab_in_list);
+	ft_lstdel(&graph->list_tmp, &free_tab_in_list);
+	path_index = 0;
+	dfs(graph, give_node(graph, graph->start), &path_index);
+	save_best_paths(graph);
+
+	//verif 
+	list = graph->list_paths;
+	while (list)
+	{
+		print_tab((int*)list->content, graph->nb_sommets, graph->end);
+		list = list->next;
+	}
+
+	print_graph(graph);
 }
