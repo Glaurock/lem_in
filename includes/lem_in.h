@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 15:49:35 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/22 13:01:38 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define PATH 2
 # define PARENT 0
 
-# define INF 10000
+# define INF INT_MAX
 
 typedef struct		s_edge
 {

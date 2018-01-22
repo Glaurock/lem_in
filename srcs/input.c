@@ -6,7 +6,7 @@
 /*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:19:31 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 16:05:34 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/22 12:58:07 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void		get_input(t_graph *graph)
 		ft_printf("%s\n", line);
 		if (ft_strchr(line, '-'))
 			break ;
+		ret = 0;
 		if (line[0] == '#')
 			ret = special_char(graph, &line, &check);
 		if (ret == 2)
