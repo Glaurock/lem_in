@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:00:03 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/29 17:14:18 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/29 17:31:18 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,25 @@
 
 # include <limits.h>
 # include "libft.h"
-# include "math.h"
-# include "mlx.h"
-# include "/System/Library/Frameworks/Tk.framework/Versions/8.4/Headers/X11/X.h"
+# include <math.h>
+# include <mlx.h>
+# include <time.h>
+# include </System/Library/Frameworks/Tk.framework/Versions/8.4/Headers/X11/X.h>
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
 # define MARGIN 25
+# define FPS 60
+
+typedef struct		s_timer
+{
+	clock_t			now;
+	clock_t			last_time;
+	double			delta;
+	clock_t			timer;
+	int				ticks;
+	double			time_per_tick;
+}					t_timer;
 
 typedef struct			s_point
 {
@@ -51,6 +63,7 @@ typedef struct			s_env
 	void				*win;
 	t_img				img;
 	t_list_point		*head_points;
+	t_timer				*timer;
 	int					min_x;
 	int					max_x;
 	int					min_y;
@@ -64,4 +77,7 @@ t_point	*get_point_in_list(t_env *env, char *name);
 void	free_splitted(char **splitted);
 void	draw_pixels(t_env *env, t_list_point *list);
 void	get_input(t_list_point **list, char **line);
+
+void		timer_init(t_timer *timer);
+void		get_next_time(t_timer *timer);
 #endif

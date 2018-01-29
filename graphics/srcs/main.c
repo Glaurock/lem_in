@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 09:59:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/29 17:15:05 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/29 17:46:51 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,23 @@ void	draw_edges(t_env *env, char **line)
 	}while (get_next_line(0, line) > 0);
 }
 
+int	expose_hook(void *param)
+{
+	t_env *env;
+	static int i;
+
+	env = (t_env*)param;
+	get_next_time(env->timer);
+	if (env->timer->delta >= 1)
+	{
+//		update_game(env);
+		mlx_put_image_to_window(env->mlx, env->win, env->img.img_ptr, 0, 0);
+	}
+	if (env->timer->timer >= CLOCKS_PER_SEC / 30)
+		ft_printf("%d\n", i++);
+	return (0);
+}
+
 int		main(void)
 {
 	t_list_point	*list;
@@ -77,6 +94,9 @@ int		main(void)
 	find_min_max(env, list);
 	draw_pixels(env, list);
 	draw_edges(env, &line);
-	mlx_put_image_to_window(env->mlx, env->win, env->img.img_ptr, 0, 0);
+	mallcheck(env->timer = (t_timer*)ft_memalloc(sizeof(t_timer)));
+	timer_init(env->timer);
+	mlx_expose_hook(env->win, expose_hook, (void*)env);
+	mlx_loop_hook(env->mlx, expose_hook, (void*)env);
 	mlx_loop(env->mlx);
 }

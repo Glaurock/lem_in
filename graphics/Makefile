@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/01/29 17:14:50 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/01/29 17:29:02 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC = \
 	main.c \
 	draw.c \
 	utils.c \
-	input.c
+	input.c \
+	time.c
 
 LIB = ../libft/libft.a \
 
