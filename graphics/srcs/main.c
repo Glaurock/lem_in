@@ -6,13 +6,11 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 09:59:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/29 17:46:51 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/30 16:30:20 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in_graphics.h"
-
-
 
 void	find_min_max(t_env *env, t_list_point *list)
 {
@@ -32,49 +30,36 @@ void	find_min_max(t_env *env, t_list_point *list)
 			env->min_y = list->point->y;
 		list = list->next;
 	}
-//	ft_dprintf(2, "min: %d, max: %d\n", env->min_x, env->max_x);
-//	ft_dprintf(2, "min: %d, max: %d\n", env->min_y, env->max_y);
 }
 
-void	draw_edges(t_env *env, char **line)
+void	update_game(t_env *env, char *line)
 {
-	t_point		*init;
-	t_point		*final;
-	char		**splitted;
+	char	**splitted;
+	char	**splitted2;
+	int		i;
+	t_point	*point;
 
-	do
+	splitted = ft_strsplit(line, ' ');
+	i = 0;
+	draw_edges(env);
+	draw_points(env);
+	while (splitted[i])
 	{
-		if (*line[0] == '\0')
-			break ;
-		splitted = ft_strsplit(*line, '-');
-		init = get_point_in_list(env, splitted[0]);
-		final = get_point_in_list(env, splitted[1]);
-		draw_line(env, init, final);
-		free_splitted(splitted);
-		ft_memdel((void**)line);
-	}while (get_next_line(0, line) > 0);
-}
-
-int	expose_hook(void *param)
-{
-	t_env *env;
-	static int i;
-
-	env = (t_env*)param;
-	get_next_time(env->timer);
-	if (env->timer->delta >= 1)
-	{
-//		update_game(env);
-		mlx_put_image_to_window(env->mlx, env->win, env->img.img_ptr, 0, 0);
+		splitted2 = ft_strsplit(splitted[i], '-');
+		point = get_point_in_list(env, splitted2[1]);
+//		ft_dprintf(2, "%d, %d\n", point->x, point->y);
+		draw_ant(env, point);
+		free_splitted(splitted2);
+		i++;
 	}
-	if (env->timer->timer >= CLOCKS_PER_SEC / 30)
-		ft_printf("%d\n", i++);
-	return (0);
+	draw_start_end(env);
+	free_splitted(splitted);
 }
 
 int		main(void)
 {
 	t_list_point	*list;
+	t_list_edges	*l_edges;
 	char			*line;
 	t_env			*env;
 
@@ -89,13 +74,23 @@ int		main(void)
 		&env->img.size_l, &env->img.endian);
 	list = NULL;
 	line = NULL;
-	get_input(&list, &line);
+	l_edges = NULL;
+	env->head_edges = l_edges;
 	env->head_points = list;
+	get_input(env, &line);
+	list = env->head_points;
+
 	find_min_max(env, list);
-	draw_pixels(env, list);
-	draw_edges(env, &line);
+	give_coord(env);
+	draw_edges(env);
+	draw_points(env);
+	draw_start_end(env);
+
 	mallcheck(env->timer = (t_timer*)ft_memalloc(sizeof(t_timer)));
 	timer_init(env->timer);
+
+	mlx_put_image_to_window(env->mlx, env->win, env->img.img_ptr, 0, 0);
+	mlx_hook(env->win, 17, 0, exit_hook, (void*)env);
 	mlx_expose_hook(env->win, expose_hook, (void*)env);
 	mlx_loop_hook(env->mlx, expose_hook, (void*)env);
 	mlx_loop(env->mlx);

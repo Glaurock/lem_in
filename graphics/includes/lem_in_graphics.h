@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:00:03 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/29 17:31:18 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/30 14:46:53 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define WINDOW_HEIGHT 600
 # define MARGIN 25
 # define FPS 60
+# define ANT_WIDTH 5
+# define START_WIDTH 7
+# define POINT_SIZE 4
 
 typedef struct		s_timer
 {
@@ -39,6 +42,8 @@ typedef struct			s_point
 {
 	int					x;
 	int					y;
+	int					start: 2;
+	int					end: 2;
 }						t_point;
 
 typedef struct			s_list_point
@@ -47,6 +52,13 @@ typedef struct			s_list_point
 	char				*name;
 	t_point				*point;
 }						t_list_point;
+
+typedef struct			s_list_edges
+{
+	struct s_list_edges	*next;
+	char				*node1;
+	char				*node2;
+}						t_list_edges;
 
 typedef struct			s_img
 {
@@ -63,6 +75,7 @@ typedef struct			s_env
 	void				*win;
 	t_img				img;
 	t_list_point		*head_points;
+	t_list_edges		*head_edges;
 	t_timer				*timer;
 	int					min_x;
 	int					max_x;
@@ -71,13 +84,28 @@ typedef struct			s_env
 }						t_env;
 
 void	draw_line(t_env *env, t_point *ini_point, t_point *final_point);
+void	draw_edges(t_env *env);
+void	draw_points(t_env *env);
+void	give_coord(t_env *env);
+
+void	draw_ant(t_env *env, t_point *point);
+void	draw_start_end2(t_env *env, t_point *point);
+void	draw_start_end(t_env *env);
+
+void	update_game(t_env *env, char *line);
+
 double	get_slope(double min, double max, double new_min, double new_max);
 double	map(double nb, double min, double slope, double new_min);
+void	my_clear_image(t_env *env);
+
 t_point	*get_point_in_list(t_env *env, char *name);
 void	free_splitted(char **splitted);
-void	draw_pixels(t_env *env, t_list_point *list);
-void	get_input(t_list_point **list, char **line);
+void	get_input(t_env *env, char **line);
 
 void		timer_init(t_timer *timer);
 void		get_next_time(t_timer *timer);
+void		reset_timer(t_timer *timer);
+
+int		expose_hook(void *param);
+int		exit_hook(void *param);
 #endif

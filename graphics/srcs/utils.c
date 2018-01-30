@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 17:05:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/29 17:13:39 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/30 14:29:26 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,18 @@ void	free_splitted(char **splitted)
 		i++;
 	}
 	ft_memdel((void**)&splitted);
+}
+
+void	my_clear_image(t_env *env)
+{
+	int x;
+	int y;
+
+	y = -1;
+	while (++y < WINDOW_HEIGHT)
+	{
+		x = -1;
+		while (++x < WINDOW_WIDTH)
+			env->img.data[y * WINDOW_WIDTH + x] = 0;
+	}
 }

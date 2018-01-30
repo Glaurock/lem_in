@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 14:29:49 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/29 17:13:23 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/30 13:07:40 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,22 +97,31 @@ void	draw_line(t_env *env, t_point *ini_point, t_point *final_point)
 		vertical(env, tab);
 }
 
-void	draw_pixels(t_env *env, t_list_point *list)
+void	give_coord(t_env *env)
 {
 	double slope_x;
 	double slope_y;
+	t_list_point *list;
 
+	list = env->head_points;
 	slope_x = get_slope(env->min_x, env->max_x, MARGIN, WINDOW_WIDTH - MARGIN);
 	slope_y = get_slope(env->min_y, env->max_y, MARGIN, WINDOW_HEIGHT - MARGIN);
 	while (list)
 	{
 		list->point->x = (int)map(list->point->x, env->min_x, slope_x, MARGIN);
 		list->point->y = (int)map(list->point->y, env->min_y, slope_y, MARGIN);
-//		ft_dprintf(2, "%d, %d\n", pixel_x, pixel_y);
-		if (list->point->y >= 0 && list->point->y < WINDOW_HEIGHT && list->point->x  >= 0 && list->point->y  < WINDOW_WIDTH)
-			env->img.data[list->point->y * WINDOW_WIDTH + list->point->x] = 0xffffff;
 		list = list->next;
 	}
 }
 
+void	draw_edges(t_env *env)
+{
+	t_list_edges *list;
 
+	list = env->head_edges;
+	while (list)
+	{
+		draw_line(env, get_point_in_list(env, list->node1), get_point_in_list(env, list->node2));
+		list = list->next;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 17:21:36 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/29 17:28:31 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/01/30 12:07:27 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,10 @@ void		get_next_time(t_timer *timer)
 	timer->delta += (timer->now - timer->last_time) / timer->time_per_tick;
 	timer->timer += timer->now - timer->last_time;
 	timer->last_time = timer->now;
+}
+
+void		reset_timer(t_timer *timer)
+{
+	timer->ticks = 0;
+	timer->timer = 0;
 }
