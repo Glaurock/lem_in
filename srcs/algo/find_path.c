@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 11:24:30 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/22 13:04:33 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/15 23:59:01 by fauconfan        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void		cancelling_negative_path(t_graph *graph)
 	int		path_index;
 
 	path_index = 0;
-	ft_dprintf(2, "\n--------cancelling algo --------\n");
 	construct_residual_graph(graph);
 	while (find_negative_path(graph))
 	{
@@ -34,12 +33,12 @@ void		cancelling_negative_path(t_graph *graph)
 
 static void	malloc_tabs(t_graph *graph)
 {
-	mallcheck(graph->tab[SEEN] = (int*)ft_memalloc(sizeof(int)
-	* graph->nb_sommets));
-	mallcheck(graph->tab[PARENT] = (int*)ft_memalloc(sizeof(int)
-	* graph->nb_sommets));
-	mallcheck(graph->tab[PATH] = (int*)ft_memalloc(sizeof(int)
-	* graph->nb_sommets));
+	mallcheck(graph->tab[SEEN] =
+		(int*)ft_memalloc(sizeof(int) * graph->nb_sommets));
+	mallcheck(graph->tab[PARENT] =
+		(int*)ft_memalloc(sizeof(int) * graph->nb_sommets));
+	mallcheck(graph->tab[PATH] =
+		(int*)ft_memalloc(sizeof(int) * graph->nb_sommets));
 }
 
 void		find_path(t_graph *graph)

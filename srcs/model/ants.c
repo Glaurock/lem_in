@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ants.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/29 14:27:50 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 15:11:15 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/15 23:57:30 by fauconfan        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int			check_arrived(t_graph *graph, int i)
 	ant = graph->tab_ants[i];
 	if (ant && ant->map[ant->index] == graph->end)
 	{
-		ft_dprintf(2, "Arrived!!!\n");
 		ft_memdel((void**)&graph->tab_ants[i]);
 		graph->arrived++;
 		return (1);
@@ -32,7 +31,6 @@ void		create_ant(t_graph *graph, int *map, t_node **tmp)
 	t_ant *ant;
 
 	mallcheck(ant = (t_ant*)ft_memalloc(sizeof(t_ant)));
-	ft_dprintf(2, "\nCreate ant\n");
 	graph->tab_ants[graph->index] = ant;
 	ant->map = map;
 	ant->index = 1;
