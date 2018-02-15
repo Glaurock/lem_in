@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/01/06 15:33:41 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/02/12 08:24:43 by fauconfan        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = lem-in
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 SRCDIR = srcs
 OBJDIR = obj
@@ -47,40 +47,40 @@ OBJS = $(addprefix $(OBJDIR)/, $(addsuffix .o, $(basename $(SRC))))
 INCS = $(addprefix -I, $(addsuffix /, $(INCDIR)))
 
 #Colors
-_GREY=\x1b[30m
-_RED=\x1b[31m
-_GREEN=\x1b[32m
-_BLUE=\x1b[94m
-_CYAN=\x1b[36m
-_WHITE=\x1b[37m
-_END=\x1b[0m
+# _GREY=\x1b[30m
+# _RED=\x1b[31m
+# _GREEN=\x1b[32m
+# _BLUE=\x1b[94m
+# _CYAN=\x1b[36m
+# _WHITE=\x1b[37m
+# _END=\x1b[0m
 
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
-	@$(CC) $(OBJS) $(FLAGS) $(LIB) $(MLXFLAGS) $(MLXFLAGS_MAC) $(MATHFLAG) -o $@
-	@echo "$(_BLUE)Compiling project $(NAME)...$(_GREEN)DONE$(_END)"
+	$(CC) $(OBJS) $(FLAGS) -o $@ $(LIB) -l m $(INCS)
+	echo "$(_BLUE)Compiling project $(NAME)...$(_GREEN)DONE$(_END)"
 
 clean:
-	@echo "$(_RED)Removed objects (.o) files.$(_END)"
-	@make clean -C ./libft
-	@/bin/rm -f $(OBJS)
+	echo "$(_RED)Removed objects (.o) files.$(_END)"
+	make clean -C ./libft
+	/bin/rm -f $(OBJS)
 
 fclean: clean
-	@echo "$(_RED)Removed project ($(NAME)).$(_END)"
-	@make fclean -C ./libft
-	@/bin/rm -f $(NAME)
+	echo "$(_RED)Removed project ($(NAME)).$(_END)"
+	make fclean -C ./libft
+	/bin/rm -f $(NAME)
 
 re: fclean all
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR) || true
-	@printf "                                                        \r"
-	@printf " $(_BLUE)Compiling $@$(_END)\r"
-	@$(CC) -o $@ -c $(FLAGS) $< $(INCS)
+	mkdir -p $(OBJDIR) || true
+	printf "                                                        \r"
+	printf " $(_BLUE)Compiling $@$(_END)\r"
+	$(CC) $(FLAGS) -c $? -o $@  $(INCS)
 
 $(LIB):
-	make -C $(@D)
+	make -C libft
 
 test: all
 	./$(NAME) < test2.txt
