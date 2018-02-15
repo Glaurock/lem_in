@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_algo_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/05 10:16:05 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 15:26:26 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/15 23:54:33 by fauconfan        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ int			calc_nb_lap(t_graph *graph, int code)
 		list = list->next;
 		nb_path++;
 	}
-	ret = (int)ceil((double)(graph->nb_ants - nb_path + total_path_dist)
-	/ (double)nb_path);
+	ret = my_ceil(graph->nb_ants - nb_path + total_path_dist, nb_path);
 	return (ret);
 }
 

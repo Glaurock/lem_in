@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/22 13:01:38 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/15 23:54:12 by fauconfan        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void				save_best_paths(t_graph *graph);
 void				read_edge(t_graph *graph, char *line);
 int					get_edge(t_graph *graph, char *line);
 int					already_an_edge(t_node *node1, t_node *node2);
+int					my_ceil(int num, int den);
 
 /*
 ** debug
@@ -117,4 +118,5 @@ void				print_list_tmp(t_list *current, int size, int end);
 void				print_tab_previous(t_node **tab_previous, int size);
 void				print_weight(int **tab, int size);
 void				print_tab(int *tab, int size, int end);
+
 #endif

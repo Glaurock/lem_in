@@ -6,7 +6,7 @@
 #    By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/02/15 23:44:40 by fauconfan        ###   ########.fr        #
+#    Updated: 2018/02/15 23:53:36 by fauconfan        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC = \
 	algo/find_path.c \
 	utils/free_n_error.c \
 	utils/transform.c \
+	utils/math_utils.c \
 	dfs.c \
 	bfs.c \
 	main.c \
@@ -59,7 +60,7 @@ _END=\x1b[0m
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
-	@$(CC) $(OBJS) $(FLAGS) -o $@ $(LIB) -l m $(INCS)
+	@$(CC) $(OBJS) $(FLAGS) -o $@ $(LIB) $(INCS)
 	@printf "$(_BLUE)Compiling project $(NAME)...$(_GREEN)DONE$(_END)\n"
 
 clean:
