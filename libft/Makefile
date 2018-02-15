@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/01/06 11:35:08 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/02/15 17:06:52 by fauconfan        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -149,7 +149,7 @@ INCS = $(addprefix -I, $(addsuffix /, $(INCDIR)))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "$(_BLUE)\nCompiling library $(NAME)... $(_GREEN)DONE$(_END)"
+	@printf "$(_BLUE)\nCompiling library $(NAME)... $(_GREEN)DONE$(_END)\n"
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
@@ -160,11 +160,11 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@$(CC) -o $@ -c $(CFLAGS) $< $(INCS)
 
 clean:
-	@echo "$(_RED)Removed objects (.o) files.$(_END)"
+	@printf "$(_RED)Removed objects (.o) files.$(_END)\n"
 	@/bin/rm -f $(OBJS)
 
 fclean: clean
-	@echo "$(_RED)Removed library ($(NAME)).$(_END)"
+	@printf "$(_RED)Removed library ($(NAME)).$(_END)\n"
 	@/bin/rm -f $(NAME)
 
 re: fclean all
