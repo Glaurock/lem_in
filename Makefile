@@ -6,7 +6,7 @@
 #    By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/02/15 23:53:36 by fauconfan        ###   ########.fr        #
+#    Updated: 2018/02/16 00:22:37 by fauconfan        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,11 +35,11 @@ SRC = \
 	algo/new_algo_utils.c \
 	algo/algo_utils.c \
 	algo/find_path.c \
+	algo/dfs.c \
+	algo/bfs.c \
 	utils/free_n_error.c \
 	utils/transform.c \
 	utils/math_utils.c \
-	dfs.c \
-	bfs.c \
 	main.c \
 
 LIB = ./libft/libft.a \
