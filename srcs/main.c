@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:13:04 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/22 12:58:15 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/15 17:26:03 by fauconfan        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	game_loop(t_graph *graph)
 	t_node	*node;
 
 	graph->space = 0;
-	ft_dprintf(2, "------Start game loop-----\n\n");
 	update_ants(graph);
 	i = 0;
 	list = graph->list_paths;
@@ -46,13 +45,12 @@ int		main(void)
 
 	mallcheck(graph = (t_graph*)ft_memalloc(sizeof(t_graph)));
 	get_input(graph);
-	ft_dprintf(2, "start : %d, end: %d\n", graph->start, graph->end);
 	transform_list_in_tab(graph);
 	find_path(graph);
 	if (!graph->list_paths)
 		free_all(graph, "No path found");
-	mallcheck(graph->tab_ants = (t_ant**)ft_memalloc(sizeof(t_ant*)
-	* (graph->nb_ants + 1)));
+	mallcheck(graph->tab_ants =
+		(t_ant**)ft_memalloc(sizeof(t_ant*) * (graph->nb_ants + 1)));
 	nb_start = graph->nb_ants;
 	while (graph->arrived != nb_start)
 		game_loop(graph);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 10:41:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/06 15:42:15 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/15 17:30:09 by fauconfan        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void				die(char *msg);
 void				mallcheck(void *param);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
+int					ft_strisdigit(char *str);
 int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);

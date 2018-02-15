@@ -6,7 +6,7 @@
 #    By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/02/15 17:07:23 by fauconfan        ###   ########.fr        #
+#    Updated: 2018/02/15 23:44:40 by fauconfan        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,22 +23,23 @@ INCDIR = includes \
 		 ./libft/includes
 
 SRC = \
-	main.c \
-	graph.c \
-	graph2.c \
-	edge.c \
-	input.c \
-	algo_utils.c \
+	io/input.c \
+	io/input2.c \
+	io/print_utils.c \
+	model/edge.c \
+	model/ants.c \
+	model/graph.c \
+	model/graph2.c \
+	model/handle_neg_cycle.c \
+	model/residual_graph.c \
+	algo/new_algo_utils.c \
+	algo/algo_utils.c \
+	algo/find_path.c \
+	utils/free_n_error.c \
+	utils/transform.c \
 	dfs.c \
-	divers.c \
-	free_n_error.c \
-	ants.c \
-	transform.c \
-	new_algo_utils.c \
-	find_path.c \
-	handle_neg_cycle.c \
-	residual_graph.c \
-	bfs.c
+	bfs.c \
+	main.c \
 
 LIB = ./libft/libft.a \
 
@@ -74,7 +75,7 @@ fclean: clean
 re: fclean all
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR) || true
+	@mkdir -p $(dir $@)
 	@printf "                                                        \r"
 	@printf "$(_BLUE)Compiling $@$(_END)\r"
 	@$(CC) $(FLAGS) -c $? -o $@  $(INCS)

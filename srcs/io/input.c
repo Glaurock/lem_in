@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:19:31 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/22 12:58:07 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/15 17:33:24 by fauconfan        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	init(t_graph *graph)
 
 	if (get_next_line(0, &line) <= 0)
 		free_all(graph, "Can't read input and/or empty input");
-	if (!ft_isdigit(line[0]))
+	if (*line == 0 || ft_strisdigit(line) == 0)
 	{
 		ft_memdel((void**)&line);
 		free_all(graph, "Can't get ants number");
@@ -52,7 +52,6 @@ static void	init(t_graph *graph)
 	else
 	{
 		graph->nb_ants = ft_atoi(&line[0]);
-		ft_dprintf(2, "nb ants : %d\n", graph->nb_ants);
 		ft_printf("%s\n", line);
 		ft_memdel((void**)&line);
 	}
@@ -80,6 +79,10 @@ static void	new_node(t_graph *graph, char *line)
 	push_end(graph, create_node(graph->nb_sommets, line));
 	ft_memdel((void**)&line);
 }
+
+/*
+**	Reading input from stdin
+*/
 
 void		get_input(t_graph *graph)
 {
