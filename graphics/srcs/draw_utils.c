@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 14:35:26 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/30 14:45:42 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/19 11:40:24 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ void	draw_start_end(t_env *env)
 	while (list)
 	{
 		if (list->point->start || list->point->end)
-		{
-//			ft_dprintf(2, "start or end: %s\n", list->name);
 			draw_start_end2(env, list->point);
-		}
 		list = list->next;
 	}
 }

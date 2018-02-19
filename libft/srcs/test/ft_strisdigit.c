@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_isnumeric.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 07:57:34 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/11/02 07:58:28 by gmonnier         ###   ########.fr       */
+/*   Created: 2018/02/14 10:07:45 by gmonnier          #+#    #+#             */
+/*   Updated: 2018/02/19 10:32:42 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+#include "libft.h"
+
+int			ft_strisdigit(char *str)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	if (!str)
+		return (0);
+	while (*str)
+	{
+		if (!ft_isdigit(*str) && *str != '-' && *str != '+')
+			return (0);
+		str++;
+	}
+	return (1);
 }

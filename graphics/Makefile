@@ -6,7 +6,7 @@
 #    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/01/30 14:36:43 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/02/19 11:38:40 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ NAME = lem_in_graphics
 
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
-MLXFLAGS_MAC = -lmlx -framework Appkit -framework OpenGL -lm
+#MLXFLAGS_MAC = -lmlx -framework Appkit -framework OpenGL -lm
+MLXFLAGS_LINUX = $(shell pkg-config --libs --static mlx)
+MATHFLAGS = -lm
+
 
 SRCDIR = srcs
 OBJDIR = obj
@@ -30,7 +33,8 @@ SRC = \
 	input.c \
 	time.c \
 	event.c \
-	draw_utils.c
+	draw_utils.c \
+	list.c
 
 LIB = ../libft/libft.a \
 
@@ -50,7 +54,7 @@ _END=\x1b[0m
 all: $(NAME)
 
 $(NAME): $(LIB) $(OBJS)
-	@$(CC) $(OBJS) $(FLAGS) $(LIB) $(MLXFLAGS) $(MLXFLAGS_MAC) -o $@
+	@$(CC) $(OBJS) $(FLAGS) $(LIB) $(MLXFLAGS_LINUX) $(MATHFLAGS) -o $@
 	@echo "$(_BLUE)Compiling project $(NAME)...$(_GREEN)DONE$(_END)"
 
 clean:

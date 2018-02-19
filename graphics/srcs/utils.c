@@ -6,11 +6,31 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 17:05:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/30 14:29:26 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/19 11:32:22 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in_graphics.h"
+
+void	find_min_max(t_env *env, t_list_point *list)
+{
+	env->min_x = list->point->x;
+	env->max_x = list->point->x;
+	env->max_y = list->point->y;
+	env->min_y = list->point->y;
+	while (list)
+	{
+		if (list->point->x > env->max_x)
+			env->max_x = list->point->x;
+		if (list->point->x < env->min_x)
+			env->min_x = list->point->x;
+		if (list->point->y > env->max_y)
+			env->max_y = list->point->y;
+		if (list->point->y < env->min_y)
+			env->min_y = list->point->y;
+		list = list->next;
+	}
+}
 
 double	get_slope(double min, double max, double new_min, double new_max)
 {
@@ -20,20 +40,6 @@ double	get_slope(double min, double max, double new_min, double new_max)
 double	map(double nb, double min, double slope, double new_min)
 {
 	return (new_min + slope * (nb - min));
-}
-
-t_point	*get_point_in_list(t_env *env, char *name)
-{
-	t_list_point *list;
-
-	list = env->head_points;
-	while (list)
-	{
-		if (ft_strcmp(list->name, name) == 0)
-			return (list->point);
-		list = list->next;
-	}
-	return (NULL);
 }
 
 void	free_splitted(char **splitted)

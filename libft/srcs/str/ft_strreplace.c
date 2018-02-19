@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_strreplace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 07:57:34 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/11/02 07:58:28 by gmonnier         ###   ########.fr       */
+/*   Created: 2018/01/31 12:52:14 by gmonnier          #+#    #+#             */
+/*   Updated: 2018/01/31 12:55:11 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+#include "libft.h"
+
+char		*ft_strreplace(char *str, char c, char replace)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	int i;
+
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			str[i] = replace;
+		i++;
+	}
+	return (str);
 }

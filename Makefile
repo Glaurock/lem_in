@@ -6,7 +6,7 @@
 #    By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/02/16 00:22:37 by fauconfan        ###   ########.fr        #
+#    Updated: 2018/02/19 10:30:17 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,9 +83,3 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 $(LIB):
 	@make -C libft
-
-test: all
-	@./$(NAME) < test2.txt
-
-other: all
-	@./$(NAME) < lemin-tests/model_3

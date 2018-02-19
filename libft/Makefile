@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+         #
+#    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/02/15 17:06:52 by fauconfan        ###   ########.fr        #
+#    Updated: 2018/02/19 10:33:02 by gmonnier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = \
 
 SRC += \
 	test/ft_isalnum.c \
+	test/ft_strisdigit.c \
 	test/ft_isalpha.c \
 	test/ft_isascii.c \
 	test/ft_isdigit.c \
@@ -61,7 +62,8 @@ SRC += \
 	mem/ft_memdel.c \
 	mem/ft_memmove.c \
 	mem/ft_bzero.c \
-	mem/ft_memset.c
+	mem/ft_memset.c \
+	mem/ft_free_splitted.c
 
 
 SRC += \
@@ -109,10 +111,12 @@ SRC += \
 	str/ft_strsplit.c \
 	str/ft_strstr.c \
 	str/ft_strsub.c \
-	str/ft_strtrim.c
+	str/ft_strtrim.c \
+	str/ft_strreplace.c
 
 SRC += \
-	get_next_line.c
+	get_next_line.c \
+	get_next_word.c
 
 SRC += \
 	ft_printf/analyse.c \
@@ -149,7 +153,7 @@ INCS = $(addprefix -I, $(addsuffix /, $(INCDIR)))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@printf "$(_BLUE)\nCompiling library $(NAME)... $(_GREEN)DONE$(_END)\n"
+	@echo "$(_BLUE)\nCompiling library $(NAME)... $(_GREEN)DONE$(_END)"
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
@@ -160,11 +164,11 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@$(CC) -o $@ -c $(CFLAGS) $< $(INCS)
 
 clean:
-	@printf "$(_RED)Removed objects (.o) files.$(_END)\n"
+	@echo "$(_RED)Removed objects (.o) files.$(_END)"
 	@/bin/rm -f $(OBJS)
 
 fclean: clean
-	@printf "$(_RED)Removed library ($(NAME)).$(_END)\n"
+	@echo "$(_RED)Removed library ($(NAME)).$(_END)"
 	@/bin/rm -f $(NAME)
 
 re: fclean all

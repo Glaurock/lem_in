@@ -6,41 +6,11 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 17:12:50 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/30 14:10:52 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/19 11:31:38 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in_graphics.h"
-
-void	push_list(t_list_point **head, int x, int y, char *name)
-{
-	t_list_point	*new;
-	t_point			*point;
-
-	new = (t_list_point*)ft_memalloc(sizeof(t_list_point));
-	if (!new)
-		return ;
-	point = (t_point*)ft_memalloc(sizeof(t_point));
-	point->x = x;
-	point->y = y;
-	new->point = point;
-	new->name = ft_strdup(name);
-	new->next = *head;
-	*head = new;
-}
-
-void	push_edges(t_list_edges **head, char *node1, char *node2)
-{
-	t_list_edges	*new;
-
-	new = (t_list_edges*)ft_memalloc(sizeof(t_list_edges));
-	if (!new)
-		return ;
-	new->node1 = ft_strdup(node1);
-	new->node2 = ft_strdup(node2);
-	new->next = *head;
-	*head = new;
-}
 
 void	get_edges(t_env *env, char **line)
 {
@@ -101,5 +71,3 @@ void	get_input(t_env *env, char **line)
 	}
 	get_edges(env, line);
 }
-
-

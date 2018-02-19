@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
+/*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 10:41:48 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/15 17:30:09 by fauconfan        ###   ########.fr       */
+/*   Updated: 2018/02/19 10:33:26 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char				*get_next_word(char **ptr, char *sep);
 void				ft_swap_ptr(void **ptr1, void **ptr2);
 void				ft_reverse_tab(int *tab, int size);
 void				die(char *msg);
 void				mallcheck(void *param);
 int					ft_isalpha(int c);
-int					ft_isdigit(int c);
 int					ft_strisdigit(char *str);
+int					ft_isdigit(int c);
 int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
@@ -56,6 +57,7 @@ void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_print_bits(unsigned char c);
 void				*ft_bzero(void *s, size_t n);
+void				ft_free_splitted(char **splitted);
 void				*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -76,6 +78,7 @@ void				ft_lst_sort(t_list **begin_list, int (*cmp)());
 t_list				*ft_lst_pop(t_list **b_list);
 int					ft_lst_size(t_list *begin_list);
 void				ft_lst_reverse(t_list **begin_list);
+char				*ft_strreplace(char *str, char c, char replace);
 void				ft_strclr(char *s);
 void				ft_strdel(char **as);
 int					ft_strequ(char const *s1, char const *s2);

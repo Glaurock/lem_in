@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:00:03 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/01/30 14:46:53 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/19 11:38:15 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <math.h>
 # include <mlx.h>
 # include <time.h>
-# include </System/Library/Frameworks/Tk.framework/Versions/8.4/Headers/X11/X.h>
+# include <math.h>
+//# include </System/Library/Frameworks/Tk.framework/Versions/8.4/Headers/X11/X.h>
+# include <X11/X.h>
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
@@ -27,6 +29,7 @@
 # define ANT_WIDTH 5
 # define START_WIDTH 7
 # define POINT_SIZE 4
+# define TIMER 1
 
 typedef struct		s_timer
 {
@@ -97,6 +100,7 @@ void	update_game(t_env *env, char *line);
 double	get_slope(double min, double max, double new_min, double new_max);
 double	map(double nb, double min, double slope, double new_min);
 void	my_clear_image(t_env *env);
+void	find_min_max(t_env *env, t_list_point *list);
 
 t_point	*get_point_in_list(t_env *env, char *name);
 void	free_splitted(char **splitted);
@@ -108,4 +112,8 @@ void		reset_timer(t_timer *timer);
 
 int		expose_hook(void *param);
 int		exit_hook(void *param);
+
+void	push_list(t_list_point **head, int x, int y, char *name);
+void	push_edges(t_list_edges **head, char *node1, char *node2);
+
 #endif

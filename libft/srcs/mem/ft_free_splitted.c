@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_free_splitted.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/02 07:57:34 by gmonnier          #+#    #+#             */
-/*   Updated: 2017/11/02 07:58:28 by gmonnier         ###   ########.fr       */
+/*   Created: 2018/01/31 12:58:26 by gmonnier          #+#    #+#             */
+/*   Updated: 2018/01/31 13:00:00 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+#include "libft.h"
+
+void		ft_free_splitted(char **splitted)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	int i;
+
+	if (!splitted)
+		return ;
+	i = 0;
+	while (splitted[i])
+	{
+		free(splitted[i]);
+		i++;
+	}
+	ft_memdel((void**)&splitted);
 }
