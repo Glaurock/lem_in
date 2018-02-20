@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 17:12:50 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/20 11:31:13 by jpriou           ###   ########.fr       */
+/*   Updated: 2018/02/20 11:49:35 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	get_edges(t_env *env, char **line)
 		push_edges(&env->head_edges, splitted[0], splitted[1]);
 		free_splitted(splitted);
 		ft_memdel((void**)line);
-		if ((get_next_line(0, line) > 0) != 0)
+		if ((get_next_line(0, line) > 0) == 0)
 			break ;
 	}
 }
