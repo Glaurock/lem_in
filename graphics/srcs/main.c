@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 09:59:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/19 11:37:48 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/20 11:31:32 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ void	draw(t_env *env)
 	draw_edges(env);
 	draw_points(env);
 	draw_start_end(env);
-
 	mallcheck(env->timer = (t_timer*)ft_memalloc(sizeof(t_timer)));
 	timer_init(env->timer);
-
 	mlx_put_image_to_window(env->mlx, env->win, env->img.img_ptr, 0, 0);
 	mlx_hook(env->win, 17, 0, exit_hook, (void*)env);
 	mlx_expose_hook(env->win, expose_hook, (void*)env);
