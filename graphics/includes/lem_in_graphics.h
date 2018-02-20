@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:00:03 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/20 11:29:12 by jpriou           ###   ########.fr       */
+/*   Updated: 2018/02/20 12:12:06 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define ANT_WIDTH 5
 # define START_WIDTH 7
 # define POINT_SIZE 4
-# define TIMER 4
+# define TIMER 2
 
 typedef struct			s_timer
 {

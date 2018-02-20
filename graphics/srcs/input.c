@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 17:12:50 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/20 11:49:35 by jpriou           ###   ########.fr       */
+/*   Updated: 2018/02/20 12:00:56 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,11 @@ void	get_input(t_env *env, char **line)
 								ft_atoi(splitted[2]), splitted[0]);
 			free_splitted(splitted);
 		}
-		else if (ft_strcmp(*line, "##start") || ft_strcmp(*line, "##end"))
+		else if (ft_strcmp(*line, "##start") == 0 ||
+			ft_strcmp(*line, "##end") == 0)
+		{
 			get_end_start(env, line);
+		}
 		ft_memdel((void**)line);
 	}
 	get_edges(env, line);
