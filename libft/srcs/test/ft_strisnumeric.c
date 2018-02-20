@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strisdigit.c                                    :+:      :+:    :+:   */
+/*   ft_strisnumeric.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/14 10:07:45 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/20 18:38:14 by fauconfan        ###   ########.fr       */
+/*   Created: 2018/02/20 18:38:24 by fauconfan         #+#    #+#             */
+/*   Updated: 2018/02/20 18:39:26 by fauconfan        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			ft_strisdigit(char *str)
+int			ft_strisnumeric(char *str)
 {
 	if (str == 0)
+		return (0);
+	if (*str == '+' || *str == '-')
+		str++;
+	if (*str == 0)
 		return (0);
 	while (*str)
 	{
