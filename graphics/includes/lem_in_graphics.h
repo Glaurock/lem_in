@@ -6,7 +6,7 @@
 /*   By: gmonnier <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 10:00:03 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/19 11:38:15 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/20 11:20:31 by gmonnier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <mlx.h>
 # include <time.h>
 # include <math.h>
-//# include </System/Library/Frameworks/Tk.framework/Versions/8.4/Headers/X11/X.h>
-# include <X11/X.h>
+# include </System/Library/Frameworks/Tk.framework/Versions/8.4/Headers/X11/X.h>
+//# include <X11/X.h>
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
