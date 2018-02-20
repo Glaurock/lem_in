@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 11:30:33 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/19 11:31:55 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/20 11:29:31 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,3 @@ t_point	*get_point_in_list(t_env *env, char *name)
 	}
 	return (NULL);
 }
-
