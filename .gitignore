@@ -1,5 +1,6 @@
 # Prerequisites
 *.d
+*.jar
 
 # Object files
 *.o
