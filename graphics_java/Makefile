@@ -31,4 +31,4 @@ fclean: clean
 re: fclean all
 
 dep:
-	@test -e $(DEP) || curl https://data.graphstream-project.org/pub/1.x/nightly-build/last/gs-core-1.3-SNAPSHOT-last.jar -o $(DEP)
+	@test -e $(DEP) || (mkdir -p deps && curl https://data.graphstream-project.org/pub/1.x/nightly-build/last/gs-core-1.3-SNAPSHOT-last.jar -o $(DEP))
