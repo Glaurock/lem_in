@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:19:31 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/27 15:23:11 by jpriou           ###   ########.fr       */
+/*   Updated: 2018/02/27 15:39:53 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,7 @@ int			special_char(t_graph *graph, char **line, int *check)
 	ft_memdel((void**)line);
 	if (a)
 	{
-		get_next_line(0, line);
-		if (!*line || ft_strchr(*line, '-') || (*line)[0] == '#')
-			free_all(graph, "Invalid end or start");
-		ft_printf("%s\n", *line);
-		a == 1 ? graph->start = graph->nb_sommets : 0;
-		a == 2 ? graph->end = graph->nb_sommets : 0;
-		(*check)++;
+		handle_following_special_char_loop(graph, line, a, check);
 		return (1);
 	}
 	return (2);

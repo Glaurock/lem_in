@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 22:11:29 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/15 23:54:12 by fauconfan        ###   ########.fr       */
+/*   Updated: 2018/02/27 15:40:41 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ void				del_graph(t_graph *graph);
 t_node				*give_node_name(t_graph *graph, char *name);
 t_node				*give_node(t_graph *graph, int number);
 void				get_input(t_graph *graph);
+void				handle_following_special_char_loop(
+						t_graph *graph,
+						char **line,
+						int a,
+						int *check);
 void				mark_path(t_graph *graph, int *tab);
 void				unmark_path(t_graph *graph, int *tab);
 void				free_tab_in_list(void *content, size_t n);
