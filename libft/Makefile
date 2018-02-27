@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmonnier <gmonnier@student.42.fr>          +#+  +:+       +#+         #
+#    By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/02/19 10:33:02 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/02/27 16:16:24 by jpriou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,7 @@ SRC += \
 SRC += \
 	str/ft_parse_char.c \
 	str/ft_parse_str.c \
+	str/ft_countchar.c \
 	str/ft_tolower.c \
 	str/ft_toupper.c \
 	str/ft_strcat.c \

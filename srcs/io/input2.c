@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 18:01:16 by fauconfan         #+#    #+#             */
-/*   Updated: 2018/02/27 15:59:50 by jpriou           ###   ########.fr       */
+/*   Updated: 2018/02/27 16:17:19 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	read_edge(t_graph *graph, char *line)
 	ft_memdel((void**)&line);
 	while (get_next_line(0, &line) > 0)
 	{
+		ft_printf("%s\n", line);
 		if (line[0] != '#')
 		{
 			if (get_edge(graph, line) == -1)
@@ -36,7 +37,6 @@ void	read_edge(t_graph *graph, char *line)
 			ft_memdel((void**)&line);
 			free_all(graph, "No Commands available in edge treatment");
 		}
-		ft_printf("%s\n", line);
 		ft_memdel((void**)&line);
 	}
 }

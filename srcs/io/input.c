@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:19:31 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/27 15:55:21 by jpriou           ###   ########.fr       */
+/*   Updated: 2018/02/27 16:11:20 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void		get_input(t_graph *graph)
 	while (get_next_line(0, &line) > 0)
 	{
 		ft_printf("%s\n", line);
-		if (ft_strchr(line, '-'))
+		if (ft_strchr(line, '-') || *line == 0)
 			break ;
 		ret = 0;
 		if (line[0] == '#')

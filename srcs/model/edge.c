@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/06 15:33:02 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/27 16:05:04 by jpriou           ###   ########.fr       */
+/*   Updated: 2018/02/27 16:15:55 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int		get_edge(t_graph *graph, char *line)
 	if (!*line)
 		return (-1);
 	splitted = ft_strsplit(line, '-');
-	if (splitted == 0 || splitted[0] == 0 ||
+	if (ft_countchar(line, '-') != 1 ||
+			splitted == 0 || splitted[0] == 0 ||
 			splitted[1] == 0 || splitted[2] != 0)
 		free_all(graph, "Wrong format edge");
 	node1 = give_node_name(graph, splitted[0]);
