@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+        */
+/*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:19:31 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/19 10:32:07 by gmonnier         ###   ########.fr       */
+/*   Updated: 2018/02/27 15:23:11 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,29 @@ int			special_char(t_graph *graph, char **line, int *check)
 
 static void	init(t_graph *graph)
 {
-	char *line;
+	char	*line;
+	int		ret;
 
-	if (get_next_line(0, &line) <= 0)
-		free_all(graph, "Can't read input and/or empty input");
-	if (*line == 0 || ft_strisdigit(line) == 0)
+	while (1)
 	{
-		ft_memdel((void**)&line);
-		free_all(graph, "Can't get ants number");
-	}
-	else
-	{
-		graph->nb_ants = ft_atoi(&line[0]);
+		ret = get_next_line(0, &line);
+		if (ret <= 0 || line == 0 || *line == 0)
+			free_all(graph, "Can't read input and/or empty input");
 		ft_printf("%s\n", line);
-		ft_memdel((void**)&line);
+		if (ft_strlen(line) >= 2 && line[0] == '#' && line[1] == '#')
+			free_all(graph, "No commands allowed here");
+		else if (ft_strlen(line) >= 1 && line[0] == '#')
+			continue ;
+		else if (ft_strisdigit(line) == 0)
+		{
+			ft_memdel((void**)&line);
+			free_all(graph, "Can't get ants number");
+		}
+		graph->nb_ants = ft_atoi(line);
+		ft_memdel((void **)&line);
+		if (graph->nb_ants <= 0 || graph->nb_ants >= 100000)
+			free_all(graph, "Number ants negtive or too large");
+		return ;
 	}
 }
 
