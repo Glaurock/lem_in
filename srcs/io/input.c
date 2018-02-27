@@ -6,7 +6,7 @@
 /*   By: jpriou <jpriou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/25 16:19:31 by gmonnier          #+#    #+#             */
-/*   Updated: 2018/02/27 15:39:53 by jpriou           ###   ########.fr       */
+/*   Updated: 2018/02/27 15:55:21 by jpriou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ static void	init(t_graph *graph)
 
 static void	fatal_errors(t_graph *graph, char *line, int check)
 {
-	if (check != 2)
+	if (check != 3)
 		free_all(graph, "Error on start and/or end");
 	if (!line)
 		free_all(graph, "No path in input");
 	read_edge(graph, line);
-	if (graph->start == graph->end || check != 2)
+	if (graph->start == graph->end)
 		free_all(graph, "Error input start and/or end");
 }
 
