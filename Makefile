@@ -6,7 +6,7 @@
 #    By: fauconfan <fauconfan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/02 08:23:52 by gmonnier          #+#    #+#              #
-#    Updated: 2018/02/19 10:30:17 by gmonnier         ###   ########.fr        #
+#    Updated: 2018/10/01 08:27:29 by jpriou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,13 +49,14 @@ OBJS = $(addprefix $(OBJDIR)/, $(addsuffix .o, $(basename $(SRC))))
 INCS = $(addprefix -I, $(addsuffix /, $(INCDIR)))
 
 #Colors
-_GREY=\x1b[30m
-_RED=\x1b[31m
-_GREEN=\x1b[32m
-_BLUE=\x1b[94m
-_CYAN=\x1b[36m
-_WHITE=\x1b[37m
-_END=\x1b[0m
+_RED=$(shell tput setaf 1 2> /dev/null || echo "")
+_GREEN=$(shell tput setaf 2 2> /dev/null || echo "")
+_YELLOW=$(shell tput setaf 3 2> /dev/null || echo "")
+_BLUE=$(shell tput setaf 4 2> /dev/null || echo "")
+_PURPLE=$(shell tput setaf 5 2> /dev/null || echo "")
+_CYAN=$(shell tput setaf 6 2> /dev/null || echo "")
+_WHITE=$(shell tput setaf 7 2> /dev/null || echo "")
+_END=$(shell tput sgr0 2> /dev/null || echo "")
 
 all: $(NAME)
 
